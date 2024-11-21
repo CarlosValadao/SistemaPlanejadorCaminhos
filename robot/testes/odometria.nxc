@@ -1,0 +1,126 @@
+#define DIAMETRO_RODA 5.6 // cm
+#define DISTANCIA_ENTRE_RODAS 18
+#define DISTANCIA_RODA_CENTRO 8.5
+#define RAIO_RODA 2.8 // cm
+#define MOTOR_E OUT_A // Motor da esquerda
+#define MOTOR_D OUT_B // Mootor da direita
+#define MOTOR_ED OUT_AB
+#define POTENCIA_MOTOR 25
+
+void calcula_deslocamento();
+void girar_esq_normal();
+
+task odometria();
+
+enum REGIAO { BASE, BANCADA, PATIO, ESTOQUE };// PATIO é a região onde tem várias bancadas
+
+struct Robot {
+	// Indica se o robô está disponivel na base
+	bool disponivel_base;// começa na base
+	REGIAO regiao;
+	// Vetor que diz a orientação atual do robô (começa virado para o norte)
+	bool orientacao[4];// NORTE - OESTE - SUL - LESTE
+	// Vetor deslocamento do robô
+	// O referencial (X,Y) é relativo a posição inicial, que deverá ser na fita especificada
+	float vetor_deslocamento[2];// = {0, 0};//Indica o deslocamento em torno de X e Y respectivamente
+	long grau_anterior_RE;// = MotorRotationCount(MOTOR_A);// Roda esquerda
+   long grau_anterior_RD;// Roda direita
+	bool em_rotacao;// = false;
+};
+mutex roboMutex;// mutex para alterar os estados do robô
+Robot robo;// N�o pode inicializar dentro da main, as tasks n�o v�o reconhecer de forma f�cil
+
+
+
+
+task main(){
+   // INICIALIZANDO A ESTRUTURA DO ROBÔ
+   //Robot robo;
+   robo.disponivel_base = true;// começa na base
+   robo.regiao = BASE;// começa na base
+   //
+   robo.orientacao[0] = true;// Começa voltado pro norte do mapa
+   robo.orientacao[0] = false;
+   robo.orientacao[0] = false;
+   robo.orientacao[0] = false;
+   //
+   robo.vetor_deslocamento[0] = 0;
+   robo.vetor_deslocamento[1] = 0;
+   //
+   robo.grau_anterior_RE = MotorRotationCount(MOTOR_E);
+   robo.grau_anterior_RD = MotorRotationCount(MOTOR_D);
+   robo.em_rotacao = false;
+
+   //Acquire(robo.roboMutex);
+
+
+   // INICIALIZA TODAS AS OUTRAS TASK AQUI
+
+}
+
+
+task odometria(){
+     while (true){
+     Acquire(roboMutex);
+     calcula_deslocamento();
+     Release(roboMutex);
+     Wait(MS_400);
+     }
+}
+
+//=========================================================================================================================
+void girar_esq_normal(){
+    // Calcula para 90 graus
+    long grau = (DISTANCIA_RODA_CENTRO/RAIO_RODA)*90;
+    // Trava o mutex
+    Acquire(roboMutex);
+    calcula_deslocamento();
+    RotateMotorEx(MOTOR_ED, POTENCIA_MOTOR, grau, -100, true, true);
+    calcula_deslocamento();// Deveria ser aqui ou l� no final
+    if (robo.orientacao[0]==true){// Se estiver para o NORTE
+       // vai pro oeste
+       robo.orientacao[0]=false;
+       robo.orientacao[1]=true;
+    } else if (robo.orientacao[1]==true){// Se estiver para o OESTE
+       // vai pro sul
+       robo.orientacao[1]=false;
+       robo.orientacao[2]=true;
+    } else if (robo.orientacao[2]==true){// Se estiver para o SUL
+       // vai pro leste
+       robo.orientacao[2]=false;
+       robo.orientacao[3]=true;
+    }
+    else if (robo.orientacao[3]==true){// Se estiver para o LESTE
+       // vai pro norte
+       robo.orientacao[3]=false;
+       robo.orientacao[0]=true;
+    }
+    Off(MOTOR_ED);
+    Release(roboMutex);
+    Wait(MS_200);
+}
+
+
+//SE EU COLOCO O SAFECALL, O PROPRIO COMPILADOR FAZ AS JOGADAS DO ACQUIRE E RELEASE
+void calcula_deslocamento(){
+   // Pego o grau atual
+   long RE_Atual = MotorRotationCount(MOTOR_E);
+   long RD_Atual = MotorRotationCount(MOTOR_D);
+   // Com esta conta eu tenho o deslocamento nulo ao girar no proprio eixo
+   long desloc_grau = ((RE_Atual - robo.grau_anterior_RE) + (RD_Atual - robo.grau_anterior_RD))/2;
+   float desloc_cm = 2*PI*desloc_grau; 
+   // Atualizo o grau anterior do robo
+   robo.grau_anterior_RE = RE_Atual;
+   robo.grau_anterior_RD = RD_Atual;
+   // Atualizo a distancia do proprio robo
+    if (robo.orientacao[0]==true){// Se estiver para o NORTE
+       robo.vetor_deslocamento[1] = robo.vetor_deslocamento[1] + desloc_cm;
+    } else if (robo.orientacao[1]==true){// Se estiver para o OESTE
+       robo.vetor_deslocamento[1] = robo.vetor_deslocamento[0] - desloc_cm;
+    } else if (robo.orientacao[2]==true){// Se estiver para o SUL
+       robo.vetor_deslocamento[1] = robo.vetor_deslocamento[1] - desloc_cm;
+    } else if (robo.orientacao[3]==true){// Se estiver para o LESTE
+       robo.vetor_deslocamento[1] = robo.vetor_deslocamento[0] + desloc_cm;
+    }
+   //return desloc_cm;
+}
