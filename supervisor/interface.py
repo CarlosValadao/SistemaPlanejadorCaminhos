@@ -34,8 +34,12 @@ class RobotCommThread(QThread):
 class RobotArea(QFrame):
     def __init__(self):
         super().__init__()
-        self.robot_position = [20, 340]
+        self.robot_position = [260, 170]
         self.rastro = []
+        self.rectangles = []  # Vetor para armazenar retângulos
+        self.drawing = False  # Estado do desenho
+        self.start_point = None
+        self.end_point = None
         self.setFixedSize(540, 360)
 
     def update_robot_position(self, new_position):
@@ -50,19 +54,18 @@ class RobotArea(QFrame):
         painter.drawRect(0, 0, self.width(), self.height())
         painter.setPen(Qt.black)
         painter.setBrush(Qt.NoBrush)
-        painter.drawRect(1, 1, 80, 358)
-        painter.drawRect(self.width() - 81, 1, 80, 358)
 
         square_width = 60
         square_height = 60
         offset_x = 165
-        offset_y = 1
-        spacing = 89
-        
-        for row in range(3):
+        offset_y = 20
+        spacing_x = 89
+        spacing_y = 198
+
+        for row in range(2):
             for col in range(2):
-                x = offset_x + col * (square_width + spacing)
-                y = offset_y + row * (square_height + spacing)
+                x = offset_x + col * (square_width + spacing_x)
+                y = offset_y + row * (square_height + spacing_y)
                 painter.setPen(Qt.black)
                 painter.drawRect(x, y, square_width, square_height)
 
@@ -72,6 +75,34 @@ class RobotArea(QFrame):
 
         painter.setBrush(QColor(255, 0, 0))
         painter.drawEllipse(self.robot_position[0], self.robot_position[1], 20, 20)
+
+        
+        painter.setPen(QColor(100, 100, 100))
+        painter.setBrush(QColor(200, 200, 200, 100))
+        for rect in self.rectangles:
+            start, end = rect
+            painter.drawRect(start.x(), start.y(), end.x() - start.x(), end.y() - start.y())
+
+        if self.drawing and self.start_point and self.end_point:
+            painter.drawRect(self.start_point.x(), self.start_point.y(),
+                             self.end_point.x() - self.start_point.x(),
+                             self.end_point.y() - self.start_point.y())
+
+    def mousePressEvent(self, event):
+        if event.button() == Qt.LeftButton and self.parent().drawing_mode:
+            self.drawing = True
+            self.start_point = event.pos()
+
+    def mouseMoveEvent(self, event):
+        if self.drawing:
+            self.end_point = event.pos()
+            self.update()
+
+    def mouseReleaseEvent(self, event):
+        if event.button() == Qt.LeftButton and self.drawing:
+            self.drawing = False
+            self.rectangles.append((self.start_point, self.end_point))
+            self.update()
 
 class RobotInterface(QWidget):
     def __init__(self):
@@ -91,7 +122,12 @@ class RobotInterface(QWidget):
         self.button = QPushButton('Ativar Robô', self)
         self.button.clicked.connect(self.toggle_robot)
         self.control_layout.addWidget(self.button)
-        
+
+        self.drawing_mode = False
+        self.draw_button = QPushButton('Desenhar Obstaculo', self)
+        self.draw_button.clicked.connect(self.toggle_drawing_mode)
+        self.control_layout.addWidget(self.draw_button)
+
         self.quit_button = QPushButton('Sair', self)
         self.quit_button.clicked.connect(self.close_application)
         self.control_layout.addWidget(self.quit_button)
@@ -189,6 +225,13 @@ class RobotInterface(QWidget):
             self.region_label.setText('Região: Estoque')
         else:
             self.region_label.setText('Região: Desconhecida')
+
+    def toggle_drawing_mode(self):
+        self.drawing_mode = not self.drawing_mode
+        if self.drawing_mode:
+            self.draw_button.setStyleSheet("background-color: green; color: white;")
+        else:
+            self.draw_button.setStyleSheet("")
 
     def close_application(self):
         print("Aplicação fechando...")
