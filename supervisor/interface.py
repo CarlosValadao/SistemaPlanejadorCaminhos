@@ -1,6 +1,6 @@
 import sys
 from time import sleep
-from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal
+from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal, QPoint
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QFrame, QLabel
 from PyQt5.QtGui import QPainter, QColor, QFont
 import SupervisorClient
@@ -36,7 +36,7 @@ class RobotArea(QFrame):
         super().__init__()
         self.robot_position = [260, 170]
         self.rastro = []
-        self.rectangles = []  # Vetor para armazenar retângulos
+        self.obstacles = []  # Vetor para armazenar retângulos
         self.drawing = False  # Estado do desenho
         self.start_point = None
         self.end_point = None
@@ -79,14 +79,15 @@ class RobotArea(QFrame):
         
         painter.setPen(QColor(100, 100, 100))
         painter.setBrush(QColor(200, 200, 200, 100))
-        for rect in self.rectangles:
-            start, end = rect
-            painter.drawRect(start.x(), start.y(), end.x() - start.x(), end.y() - start.y())
+        for obstacle in self.obstacles:
+            start, end = obstacle
+            if start is not None and end is not None:  # Ensure both points are valid
+                painter.drawLine(start, end)
 
+        # Draw the current line being drawn (if valid)
         if self.drawing and self.start_point and self.end_point:
-            painter.drawRect(self.start_point.x(), self.start_point.y(),
-                             self.end_point.x() - self.start_point.x(),
-                             self.end_point.y() - self.start_point.y())
+            painter.drawLine(self.start_point, self.end_point)
+
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton and self.parent().drawing_mode:
@@ -95,13 +96,27 @@ class RobotArea(QFrame):
 
     def mouseMoveEvent(self, event):
         if self.drawing:
-            self.end_point = event.pos()
+            current_point = event.pos()
+
+            # Restrict to horizontal or vertical lines
+            dx = abs(current_point.x() - self.start_point.x())
+            dy = abs(current_point.y() - self.start_point.y())
+
+            if dx > dy:
+                self.end_point = QPoint(current_point.x(), self.start_point.y())  # Horizontal line
+            else:
+                self.end_point = QPoint(self.start_point.x(), current_point.y())  # Vertical line
+            
             self.update()
 
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton and self.drawing:
             self.drawing = False
-            self.rectangles.append((self.start_point, self.end_point))
+            if self.start_point is not None and self.end_point is not None:  # Check for valid points
+                self.obstacles.append((self.start_point, self.end_point))
+                print(self.obstacles)
+            self.start_point = None
+            self.end_point = None
             self.update()
 
 class RobotInterface(QWidget):
@@ -238,9 +253,9 @@ class RobotInterface(QWidget):
         self.close()
 
 if __name__ == '__main__':
-    environ['QT_QPA_PLATFORM'] = 'xcb'
-    supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
-    supervisor_client.catch_all_messages()
+    #environ['QT_QPA_PLATFORM'] = 'xcb'
+    #supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
+    #supervisor_client.catch_all_messages()
     app = QApplication(sys.argv)
     window = RobotInterface()
     window.show()
