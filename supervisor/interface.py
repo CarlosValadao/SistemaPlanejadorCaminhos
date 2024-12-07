@@ -4,10 +4,23 @@ from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal, QPoint
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QFrame, QLabel
 from PyQt5.QtGui import QPainter, QColor, QFont
 import SupervisorClient
+from trajetoria import calcular_campo_potencial, planejar_trajetoria
 from threading import Thread
 from constants import NXT_BLUETOOTH_MAC_ADDRESS
 from os import environ
 from math import ceil
+
+def dividir_por_10(lista):
+    return [
+        ((x1 // 10, y1 // 10), (x2 // 10, y2 // 10))
+        for ((x1, y1), (x2, y2)) in lista
+]
+
+def multiplicar_por_10(lista):
+    return [
+        (x * 10, y * 10, z)  # Multiplica apenas os dois primeiros valores (x, y)
+        for (x, y, z) in lista
+    ]
 
 class RobotPositionThread(QThread):
     position_updated = pyqtSignal(int, int, int)
@@ -36,10 +49,16 @@ class RobotArea(QFrame):
         super().__init__()
         self.robot_position = [260, 170]
         self.rastro = []
-        self.obstacles = []  # Vetor para armazenar retângulos
-        self.drawing = False  # Estado do desenho
+        self.obstacles = []
+        self.objective = []
+        self.robot_obstacles = [((80, 180), (90, 170)), ((80, 16), (90, 150)), ((150, 180), (160.0, 170.0)), ((150.0, 160), (160, 170)), ((180, 180), (190, 170)), ((180, 160), (190, 150)), ((80, 30), (90, 20)), ((80, 10), (90, 40)), ((110, 30), (120, 20)), ((110, 10), (120, 0)), ((150, 30), (160, 20)), ((150, 10), (160, 0)), ((180, 30), (190, 20)), ((180, 10), (190, 0))]
+        self.robot_objective = []
+        self.trajetoria = []
+        self.campo = []
+        self.drawing = False
         self.start_point = None
-        self.end_point = None
+        self.rect_width = 20
+        self.rect_height = 20
         self.setFixedSize(540, 360)
 
     def update_robot_position(self, new_position):
@@ -57,10 +76,10 @@ class RobotArea(QFrame):
 
         square_width = 60
         square_height = 60
-        offset_x = 165
-        offset_y = 20
-        spacing_x = 89
-        spacing_y = 198
+        offset_x = 170 
+        offset_y = 1
+        spacing_x = 73 # distancia entre um block e outro no eixo (medida real 36.5)
+        spacing_y = 238 # altura y (360) - primeiro bloco (60) - segundo bloco (60) - offset em cima e em baixo (1+1)
 
         for row in range(2):
             for col in range(2):
@@ -76,48 +95,59 @@ class RobotArea(QFrame):
         painter.setBrush(QColor(255, 0, 0))
         painter.drawEllipse(self.robot_position[0], self.robot_position[1], 20, 20)
 
-        
+        #obstaculo
         painter.setPen(QColor(100, 100, 100))
         painter.setBrush(QColor(200, 200, 200, 100))
         for obstacle in self.obstacles:
             start, end = obstacle
             if start is not None and end is not None:  # Ensure both points are valid
-                painter.drawLine(start, end)
+                painter.drawRect(start.x(), start.y(), self.rect_width, self.rect_height)
 
-        # Draw the current line being drawn (if valid)
-        if self.drawing and self.start_point and self.end_point:
-            painter.drawLine(self.start_point, self.end_point)
+        #objetivo
+        painter.setBrush(QColor(0, 200, 0))  # Green color for the objectives
+        for obj in self.objective:
+            painter.drawEllipse(obj.x(), obj.y(), 10, 10)
 
+        # desenha o retangulo
+        if self.drawing and self.start_point:
+            painter.drawRect(self.start_point.x(), self.start_point.y(), self.rect_width, self.rect_height)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton and self.parent().drawing_mode:
             self.drawing = True
             self.start_point = event.pos()
 
-    def mouseMoveEvent(self, event):
-        if self.drawing:
-            current_point = event.pos()
+        if event.button() == Qt.LeftButton and self.parent().adding_objective_mode:
+            self.add_objective(event.pos())
 
-            # Restrict to horizontal or vertical lines
-            dx = abs(current_point.x() - self.start_point.x())
-            dy = abs(current_point.y() - self.start_point.y())
-
-            if dx > dy:
-                self.end_point = QPoint(current_point.x(), self.start_point.y())  # Horizontal line
-            else:
-                self.end_point = QPoint(self.start_point.x(), current_point.y())  # Vertical line
-            
-            self.update()
 
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton and self.drawing:
             self.drawing = False
-            if self.start_point is not None and self.end_point is not None:  # Check for valid points
-                self.obstacles.append((self.start_point, self.end_point))
-                print(self.obstacles)
+            if self.start_point is not None:  # Check for valid start point
+                # Define the end point based on the starting point and the rect dimensions
+                end_point = QPoint(self.start_point.x() + self.rect_width, self.start_point.y() + self.rect_height)
+                self.obstacles.append((self.start_point, end_point))
+                print(f"Rectangle added: Start {self.start_point}, End {end_point}")
+                self.robot_obstacles.append(((self.start_point.x()/2, 180 - (self.start_point.y())/2), (end_point.x()/2, 180 - (end_point.y()/2))))
+                print(self.robot_obstacles)
             self.start_point = None
-            self.end_point = None
             self.update()
+
+    def add_objective(self, position):
+        if(len(self.objective) > 0):
+            self.objective.pop()
+            self.robot_objective.pop()
+        self.objective.append(position)
+        self.robot_objective.append((position.x()/2, 180-(position.y()/2)))
+        print(self.robot_objective)
+        print(f"Objective added at: {position}")
+        self.update()
+
+    def set_rect_size(self, width, height):
+        """Ajusta o tamanho dos retângulos desenhados."""
+        self.rect_width = width
+        self.rect_height = height
 
 class RobotInterface(QWidget):
     def __init__(self):
@@ -139,9 +169,18 @@ class RobotInterface(QWidget):
         self.control_layout.addWidget(self.button)
 
         self.drawing_mode = False
+        self.adding_objective_mode = False  # Variável para controlar o modo de adicionar objetivo
         self.draw_button = QPushButton('Desenhar Obstaculo', self)
         self.draw_button.clicked.connect(self.toggle_drawing_mode)
         self.control_layout.addWidget(self.draw_button)
+
+        self.add_objective_button = QPushButton('Adicionar Objetivo', self)  # Novo botão
+        self.add_objective_button.clicked.connect(self.toggle_adding_objective_mode)
+        self.control_layout.addWidget(self.add_objective_button)
+
+        self.trajetoria_button = QPushButton('Gerar Trajetoria', self)
+        self.trajetoria_button.clicked.connect(self.path_planning)
+        self.control_layout.addWidget(self.trajetoria_button)
 
         self.quit_button = QPushButton('Sair', self)
         self.quit_button.clicked.connect(self.close_application)
@@ -150,7 +189,7 @@ class RobotInterface(QWidget):
         self.region_label = QLabel('Região: Base', self)
         self.region_label.setFont(font)
         self.region_label.setFixedSize(label_width, label_height)
-        self.region_label.setStyleSheet("""
+        self.region_label.setStyleSheet(""" 
             QLabel {
                 border: 2px solid #333;
                 border-radius: 8px;
@@ -165,7 +204,7 @@ class RobotInterface(QWidget):
         self.coordinates_label = QLabel('Coordenadas: (0, 0)', self)
         self.coordinates_label.setFont(font)
         self.coordinates_label.setFixedSize(label_width, label_height)
-        self.coordinates_label.setStyleSheet("""
+        self.coordinates_label.setStyleSheet(""" 
             QLabel {
                 border: 2px solid #333;
                 border-radius: 8px;
@@ -248,14 +287,36 @@ class RobotInterface(QWidget):
         else:
             self.draw_button.setStyleSheet("")
 
+    def toggle_adding_objective_mode(self):
+        self.adding_objective_mode = not self.adding_objective_mode
+        if self.adding_objective_mode:
+            self.add_objective_button.setStyleSheet("background-color: green; color: white;")
+        else:
+            self.add_objective_button.setStyleSheet("")
+
+    def path_planning(self):
+        grid_size = (27,18)
+
+        obstaculos = dividir_por_10(self.robot_area.robot_obstacles)
+        objetivo = [tuple(valor // 10 for valor in tupla) for tupla in self.robot_area.robot_objective]
+
+        inicio = (13, 8)
+
+        campo = calcular_campo_potencial(grid_size, objetivo[0], obstaculos, 1)
+        trajetoria = planejar_trajetoria(campo, inicio, objetivo)
+        #print(trajetoria)
+        self.robot_area.trajetoria = multiplicar_por_10(trajetoria)
+        self.robot_area.update()
+        print("Trajetória gerada:", self.robot_area.trajetoria)
+
     def close_application(self):
         print("Aplicação fechando...")
         self.close()
 
 if __name__ == '__main__':
-    #environ['QT_QPA_PLATFORM'] = 'xcb'
-    #supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
-    #supervisor_client.catch_all_messages()
+    environ['QT_QPA_PLATFORM'] = 'xcb'
+    supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
+    supervisor_client.catch_all_messages()
     app = QApplication(sys.argv)
     window = RobotInterface()
     window.show()
