@@ -255,9 +255,9 @@ void alinharOrientacao(int targetOrientation) {
     long diff = (targetOrientation - orientacao);
     Release(mutexDeslocamento);
 
-    if (diff > 0) { // Gire no sentido horário
+    if (diff > 0) { // Gire no sentido anti-horário
         girar_eixo_v3(100, abs(diff));
-    } else if (diff < 0) { // Gire no sentido anti-horário
+    } else if (diff < 0) { // Gire no sentido horário
         girar_eixo_v3(-100, abs(diff));
     }
     Acquire(mutexDeslocamento);
