@@ -62,7 +62,7 @@ void girar_eixo_v3(short turn_pct, long graus_curva){
 }
 
 // Inicialize orientação inicial em graus (0° = leste, 90° = norte, 180° = oeste, 270° = sul)
-int orientation = 0; // Começando apontado para o norte
+int orientation = 0; // Começando apontado para a direção leste (0°) direita
 
 // Função para calcular distância entre dois pontos
 float calculateDistance(int x1, int y1, int x2, int y2) {
