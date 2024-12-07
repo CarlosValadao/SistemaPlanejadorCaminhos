@@ -1,5 +1,3 @@
-#include "RPP.h"
-
 #define DISTANCIA_ENTRE_RODAS 16.8 // cm
 #define DIAMETRO_RODA 5.6 // cm
 #define MOTOR_E   OUT_A // Motor da esquerda
@@ -18,10 +16,10 @@ void girar_eixo_v3(short turn_pct, long graus_curva);
 // Testar acionando com PID, partida lenta
 void segue_frente_cm(float cm){
 	long passo = (cm*360)/(PI*DIAMETRO_RODA);
-	long grau = MotorRotationCount(MOTOR_D) + passo;
+	long grau = abs(MotorRotationCount(MOTOR_D)) + passo;
 	//OnRevSync(MOTOR_ED, POWER, 0);
 	OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
-	while (MotorRotationCount(MOTOR_D) < grau);
+	while (abs(MotorRotationCount(MOTOR_D)) < grau);
     //RotateMotorPID(MOTOR_ED, 100, 360, 90, 90, 40);
 	Off(MOTOR_ED);
 }
@@ -30,11 +28,7 @@ void segue_frente_cm(float cm){
 
 
 void girar_eixo_v3(short turn_pct, long graus_curva){
-	Acquire(mutexDeslocamento);
-	calcula_deslocamento();
-	Release(mutexDeslocamento);
-
-    long grau_giro_roda = (graus_curva*DISTANCIA_ENTRE_RODAS)/DIAMETRO_RODA;
+    	long grau_giro_roda = (graus_curva*DISTANCIA_ENTRE_RODAS)/DIAMETRO_RODA;
 	long passo_esquerdo = MotorRotationCount(MOTOR_E) + (-turn_pct/100)*grau_giro_roda;
 	long passo_direito = MotorRotationCount(MOTOR_D) + (turn_pct/100)*grau_giro_roda;
 	// Girando ambos
@@ -42,7 +36,7 @@ void girar_eixo_v3(short turn_pct, long graus_curva){
 	OnFwdSyncPID(MOTOR_ED, POWER, turn_pct, 90, 40, 70);
 	while ((MotorRotationCount(MOTOR_D) != passo_direito) && (MotorRotationCount(MOTOR_E) != passo_esquerdo)){}
 	Off(MOTOR_ED);
-	// Se estiver girando para direitaesquerda
+	// Se estiver girando para esquerda
 	if(turn_pct == -100){
 		// Girando oq falta
 		OnFwdSyncPID(MOTOR_D, (turn_pct/100)*POWER, 0, 90, 40, 70);
@@ -64,17 +58,20 @@ void girar_eixo_v3(short turn_pct, long graus_curva){
 		while (MotorRotationCount(MOTOR_E) != passo_esquerdo){}
 		Off(MOTOR_E);
 	}
-	muda_bussola(turn_pct);
 	Off(MOTOR_ED);
-	Wait(200);
 }
 
 // Inicialize orientação inicial em graus (0° = leste, 90° = norte, 180° = oeste, 270° = sul)
 int orientation = 0; // Começando apontado para o norte
 
+// Função para calcular distância entre dois pontos
+float calculateDistance(int x1, int y1, int x2, int y2) {
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
 
 // Função para alinhar a orientação do robô em relação a um alvo (em graus)
-void alinharOrientacao(int targetOrientation) {
+void alignOrientation(int targetOrientation) {
     long diff = (targetOrientation - orientation);
     if (diff > 0) { // Gire no sentido horário
         girar_eixo_v3(100, abs(diff));
@@ -93,26 +90,26 @@ task main() {
         int targetX = coordinates[i][0];
         int targetY = coordinates[i][1];
 	//===================== ALINHA O X ===================== //
-		TextOut(0, LCD_LINE1, "vou andar em X= ");
-		NumOut(0, LCD_LINE2, targetX-currentX);
+	TextOut(0, LCD_LINE1, "vou andar em X= ");
+	NumOut(0, LCD_LINE2, targetX-currentX);
         // Determine a direção para alcançar o próximo ponto
         if (currentX < targetX) { // Movendo para o leste (0°)
-            alinharOrientacao(0);
+            alignOrientation(0);
             segue_frente_cm(targetX-currentX);
         } else if (currentX > targetX) { // Movendo para o oeste (180°)
-            alinharOrientacao(180);
+            alignOrientation(180);
             segue_frente_cm(currentX-targetX);
         }
 	//===================== ALINHA O Y ===================== //
-		ClearScreen();
-		Wait(SEC_1);
-		TextOut(0, LCD_LINE1, "vou andar em Y= ");
-		NumOut(0, LCD_LINE2, targetY-currentY);
+	ClearScreen();
+  	Wait(SEC_1);
+	TextOut(0, LCD_LINE1, "vou andar em Y= ");
+	NumOut(0, LCD_LINE2, targetY-currentY);
         if (currentY < targetY) { // Movendo para o norte (90°)
-            alinharOrientacao(90);
+            alignOrientation(90);
             segue_frente_cm(targetY-currentY);
         } else if (currentY > targetY) { // Movendo para o sul (270°)
-            alinharOrientacao(270);
+            alignOrientation(270);
             segue_frente_cm(currentY-targetY);
         }
 
@@ -121,7 +118,7 @@ task main() {
         currentY = targetY;
         PlayTone(1000, 500); // ALINHEI UM PONTO
         ClearScreen();
-  		Wait(SEC_1);
+  	Wait(SEC_1);
     }
 
     PlayTone(1000, 500); // Emitir um som ao completar a trajetória
