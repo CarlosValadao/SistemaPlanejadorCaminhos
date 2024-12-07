@@ -10,6 +10,10 @@ from constants import NXT_BLUETOOTH_MAC_ADDRESS
 from os import environ
 from math import ceil
 
+'''
+trajetoria: lista de tuplas contendo posição e a orientação no formato (x, y, grau)
+'''
+
 def dividir_por_10(lista):
     return [
         ((x1 // 10, y1 // 10), (x2 // 10, y2 // 10))
