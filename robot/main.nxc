@@ -16,6 +16,7 @@
 #define P                   90
 #define I                   40
 #define D                   70
+#define QUEUE_SIZE 10 // Tamanho máximo da fila de pontos
 //
 #define COR_PRETA_LMI 28
 #define COR_PRETA_LMS 40
@@ -53,6 +54,7 @@ void muda_bussola(short turn_pct);
 // Para sensores
 void configureSensors();
 void playAlertBeep(byte ntime);
+
 // ================== Variaveis ==================
 long gr_ant_RE;// = MotorRotationCount(MOTOR_A);// Roda esquerda
 long gr_ant_RD;// Roda direita -> grau da roda direita
@@ -70,6 +72,11 @@ mutex RobotInOperationMutex;
 string requestMsg, msgToSend = "";
 string dataMsgToSend, responseToRequest = "";
 mutex messageMutex;
+
+
+
+int coordinates[QUEUE_SIZE][2]; // Array para armazenar os elementos da fila
+int front = 0;         // Índice do início da fila
 
 // ================== tasks ==================
 task sendRobotPosition(){
@@ -241,6 +248,23 @@ bool fim_de_curso(){
 	return false;
 }
 
+// ==================== MOVIMENTAÇÃO PBL3 ====================
+// Função para alinhar a orientação do robô em relação a um alvo (em graus)
+void alinharOrientacao(int targetOrientation) {
+    Acquire(mutexDeslocamento);
+    long diff = (targetOrientation - orientacao);
+    Release(mutexDeslocamento);
+
+    if (diff > 0) { // Gire no sentido horário
+        girar_eixo_v3(100, abs(diff));
+    } else if (diff < 0) { // Gire no sentido anti-horário
+        girar_eixo_v3(-100, abs(diff));
+    }
+    Acquire(mutexDeslocamento);
+    orientacao = targetOrientation; // Atualize a orientação atual
+    Release(mutexDeslocamento);
+}
+
 void girar_eixo_v3(short turn_pct, long graus_curva){
 	Acquire(mutexDeslocamento);
 	calcula_deslocamento();
@@ -249,40 +273,104 @@ void girar_eixo_v3(short turn_pct, long graus_curva){
     long grau_giro_roda = (graus_curva*DISTANCIA_ENTRE_RODAS)/DIAMETRO_RODA;
 	long passo_esquerdo = MotorRotationCount(MOTOR_E) + (-turn_pct/100)*grau_giro_roda;
 	long passo_direito = MotorRotationCount(MOTOR_D) + (turn_pct/100)*grau_giro_roda;
-	// Girando ambos os motores
-	OnFwdSyncPID(MOTOR_ED, POWER, turn_pct, P, I, D);
+	// Girando ambos
+	//OnFwdSync(MOTOR_ED, POWER, turn_pct);
+	OnFwdSyncPID(MOTOR_ED, POWER, turn_pct, 90, 40, 70);
 	while ((MotorRotationCount(MOTOR_D) != passo_direito) && (MotorRotationCount(MOTOR_E) != passo_esquerdo)){}
 	Off(MOTOR_ED);
-    Wait(150);
-	// Se estiver girando para esquerda
+	// Se estiver girando para direitaesquerda
 	if(turn_pct == -100){
 		// Girando oq falta
-        OnFwdSyncPID(MOTOR_D, (turn_pct/100)*POWER, turn_pct, P, I, D);
+		OnFwdSyncPID(MOTOR_D, (turn_pct/100)*POWER, 0, 90, 40, 70);
 		while (MotorRotationCount(MOTOR_D) != passo_direito){}
+		Off(MOTOR_D);
+		// Girando oq falta
+		OnFwdSyncPID(MOTOR_E, -(turn_pct/100)*POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_E) != passo_esquerdo){}
+		Off(MOTOR_E);
 	}
 	// Se estiver girando para direita
 	else{
-        OnFwdSyncPID(MOTOR_D, (turn_pct/100)*POWER, turn_pct, P, I, D);
-        while (MotorRotationCount(MOTOR_D) != passo_esquerdo){}
+		// Girando oq falta
+		OnFwdSyncPID(MOTOR_D, (turn_pct/100)*POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_D) != passo_direito){}
+		Off(MOTOR_D);
+		// Girando oq falta
+		OnFwdSyncPID(MOTOR_E, -(turn_pct/100)*POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_E) != passo_esquerdo){}
+		Off(MOTOR_E);
 	}
-
-    muda_bussola(turn_pct);
+	muda_bussola(turn_pct);
 	Off(MOTOR_ED);
-    Wait(150);
+	Wait(200);
 }
 
 
 void segue_frente_cm(float cm){
 	long passo = (cm*360)/(PI*DIAMETRO_RODA);
-	long grau = abs(MotorRotationCount(MOTOR_D)) + passo;
-    //
-	OnFwdSyncPID(MOTOR_ED, POWER, 0, P, I, D);
-	while (abs(MotorRotationCount(MOTOR_D)) != grau){};
+	long grau = MotorRotationCount(MOTOR_D) + passo;
 	//
-    Off(MOTOR_ED);
+	OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
+	while (MotorRotationCount(MOTOR_D) < grau);
+    //
+	Off(MOTOR_ED);
+    Wait(200);
 }
 
 
+void executa_trajetoria(){
+    
+    int currentX = 0, currentY = 0;
+    for (int i = 0; i < 4; i++) {
+        Acquire(mutexDeslocamento);
+        currentX = deslocamento[0];
+        currentY = deslocamento[1];
+        Release(mutexDeslocamento);
+
+        int targetX = coordinates[i][0];
+        int targetY = coordinates[i][1];
+	//===================== ALINHA O X ===================== //
+		//TextOut(0, LCD_LINE1, "vou andar em X= ");
+		//NumOut(0, LCD_LINE2, targetX-currentX);
+        // Determine a direção para alcançar o próximo ponto
+        if (currentX < targetX) { // Movendo para o leste (0°)
+            alinharOrientacao(0);
+            segue_frente_cm(targetX-currentX);
+        } else if (currentX > targetX) { // Movendo para o oeste (180°)
+            alinharOrientacao(180);
+            segue_frente_cm(currentX-targetX);
+        }
+	//===================== ALINHA O Y ===================== //
+		//ClearScreen();
+		//Wait(SEC_1);
+		//TextOut(0, LCD_LINE1, "vou andar em Y= ");
+		//NumOut(0, LCD_LINE2, targetY-currentY);
+        if (currentY < targetY) { // Movendo para o norte (90°)
+            alinharOrientacao(90);
+            segue_frente_cm(targetY-currentY);
+        } else if (currentY > targetY) { // Movendo para o sul (270°)
+            alinharOrientacao(270);
+            segue_frente_cm(currentY-targetY);
+        }
+
+        // Atualize a posição atual. (A PROPRIA THREAD JÁ FAZ ISSO)
+        // Acquire(mutexDeslocamento);
+        // deslocamento[0] = targetX;
+        // deslocamento[1] = targetY;
+        // Release(mutexDeslocamento);
+        PlayTone(1000, 500); // ALINHEI UM PONTO
+        Acquire(mutexDeslocamento);
+        TextOut(0, LCD_LINE1, "Estou em X= ");
+		NumOut(0, LCD_LINE2, deslocamento[0]);
+		TextOut(0, LCD_LINE3, "Estou em Y= ");
+		NumOut(0, LCD_LINE4, deslocamento[1]);
+        Release(mutexDeslocamento);
+        Wait(SEC_2);
+        //
+        ClearScreen();
+  		Wait(SEC_1);
+    }
+}
 
 task main (){
     SetVolume(100);
@@ -296,13 +384,14 @@ task main (){
     //
     configureSensors();
     //
-    StartTask(sendRobotPosition);
-    StartTask(readFirstSupervisorMessage); // VAI RECEBER O INICIO E A TRAJETORIA
+    //StartTask(sendRobotPosition);
+    //StartTask(readFirstSupervisorMessage); // VAI RECEBER O INICIO E A TRAJETORIA
     StartTask(odometria);
     //
     while (!RobotInOperation);
     // OS ALGORITMOS COMEÇAM AQUI EM BAIXO
-    // --
-    // --
+    // -- Recebe as coordenadas dos pontos da trajetória. Coloca os pontos na fila
+    // -- Executa a trajetória
+    executa_trajetoria();
 
 }
