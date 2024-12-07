@@ -42,7 +42,7 @@ Use MAILBOX10 to receive message
 // supervisor
 byte parseMessage(string &message);
 void formatMessage(byte code, string &smessage);
-void formatDataMessage(float xcoord, float ycoord, byte region, string &smessage);
+void formatDataMessage(float xcoord, float ycoord, string &smessage);
 bool sendMessage(string &message, byte msgType);
 bool readMessage(string &receivedMsg);
 
@@ -64,13 +64,12 @@ void formatMessage(byte code, string &smessage)
      smessage = StrCat("2;", scode);
 }
 
-void formatDataMessage(float xcoord, float ycoord, byte region, string &smessage)
+void formatDataMessage(float xcoord, float ycoord, string &smessage)
 {
      string sxcoord, sycoord, region2str;
      sxcoord = NumToStr(xcoord);
      sycoord = NumToStr(ycoord);
-     region2str = NumToStr(region);
-     smessage = StrCat("3;", sxcoord, ";", sycoord, ";", region2str);
+     smessage = StrCat("3;", sxcoord, ";", sycoord);
 }
 
 bool sendMessage(string &message, byte msgType)

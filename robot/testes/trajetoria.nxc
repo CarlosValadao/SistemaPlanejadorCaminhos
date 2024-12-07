@@ -1,0 +1,126 @@
+#define DISTANCIA_ENTRE_RODAS 16.8 // cm
+#define DIAMETRO_RODA 5.6 // cm
+#define MOTOR_E   OUT_A // Motor da esquerda
+#define MOTOR_D   OUT_B // Mootor da direita
+#define MOTOR_ED  OUT_AB
+#define ROTATION_SPEED 30     // Velocidade de rotação
+#define MOVE_SPEED 50         // Velocidade de movimento
+#define POWER               30
+
+
+void segue_frente_cm(float cm);
+void girar_eixo_v3(short turn_pct, long graus_curva);
+
+
+
+// Testar acionando com PID, partida lenta
+void segue_frente_cm(float cm){
+	long passo = (cm*360)/(PI*DIAMETRO_RODA);
+	long grau = abs(MotorRotationCount(MOTOR_D)) + passo;
+	//OnRevSync(MOTOR_ED, POWER, 0);
+	OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
+	while (abs(MotorRotationCount(MOTOR_D)) < grau);
+    //RotateMotorPID(MOTOR_ED, 100, 360, 90, 90, 40);
+	Off(MOTOR_ED);
+}
+
+
+
+
+void girar_eixo_v3(short turn_pct, long graus_curva){
+    	long grau_giro_roda = (graus_curva*DISTANCIA_ENTRE_RODAS)/DIAMETRO_RODA;
+	long passo_esquerdo = MotorRotationCount(MOTOR_E) + (-turn_pct/100)*grau_giro_roda;
+	long passo_direito = MotorRotationCount(MOTOR_D) + (turn_pct/100)*grau_giro_roda;
+	// Girando ambos
+	//OnFwdSync(MOTOR_ED, POWER, turn_pct);
+	OnFwdSyncPID(MOTOR_ED, POWER, turn_pct, 90, 40, 70);
+	while ((MotorRotationCount(MOTOR_D) != passo_direito) && (MotorRotationCount(MOTOR_E) != passo_esquerdo)){}
+	Off(MOTOR_ED);
+	// Se estiver girando para esquerda
+	if(turn_pct == -100){
+		// Girando oq falta
+		OnFwdSyncPID(MOTOR_D, (turn_pct/100)*POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_D) != passo_direito){}
+		Off(MOTOR_D);
+		// Girando oq falta
+		OnFwdSyncPID(MOTOR_E, -(turn_pct/100)*POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_E) != passo_esquerdo){}
+		Off(MOTOR_E);
+	}
+	// Se estiver girando para direita
+	else{
+		// Girando oq falta
+		OnFwdSyncPID(MOTOR_D, (turn_pct/100)*POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_D) != passo_direito){}
+		Off(MOTOR_D);
+		// Girando oq falta
+		OnFwdSyncPID(MOTOR_E, -(turn_pct/100)*POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_E) != passo_esquerdo){}
+		Off(MOTOR_E);
+	}
+	Off(MOTOR_ED);
+}
+
+// Inicialize orientação inicial em graus (0° = leste, 90° = norte, 180° = oeste, 270° = sul)
+int orientation = 0; // Começando apontado para a direção leste (0°) direita
+
+// Função para calcular distância entre dois pontos
+float calculateDistance(int x1, int y1, int x2, int y2) {
+    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+}
+
+
+// Função para alinhar a orientação do robô em relação a um alvo (em graus)
+void alignOrientation(int targetOrientation) {
+    long diff = (targetOrientation - orientation);
+    if (diff > 0) { // Gire no sentido horário
+        girar_eixo_v3(100, abs(diff));
+    } else if (diff < 0) { // Gire no sentido anti-horário
+        girar_eixo_v3(-100, abs(diff));
+    }
+    orientation = targetOrientation; // Atualize a orientação atual
+}
+
+// Função principal para rastrear a trajetória
+task main() {
+    // Lista de coordenadas de destino
+    int coordinates[4][2] = {{85, 0}, {85, 70}, {85, 140}, {50, 70}};
+    int currentX = 0, currentY = 0;
+    for (int i = 0; i < 4; i++) {
+        int targetX = coordinates[i][0];
+        int targetY = coordinates[i][1];
+	//===================== ALINHA O X ===================== //
+	TextOut(0, LCD_LINE1, "vou andar em X= ");
+	NumOut(0, LCD_LINE2, targetX-currentX);
+        // Determine a direção para alcançar o próximo ponto
+        if (currentX < targetX) { // Movendo para o leste (0°)
+            alignOrientation(0);
+            segue_frente_cm(targetX-currentX);
+        } else if (currentX > targetX) { // Movendo para o oeste (180°)
+            alignOrientation(180);
+            segue_frente_cm(currentX-targetX);
+        }
+	//===================== ALINHA O Y ===================== //
+	ClearScreen();
+  	Wait(SEC_1);
+	TextOut(0, LCD_LINE1, "vou andar em Y= ");
+	NumOut(0, LCD_LINE2, targetY-currentY);
+        if (currentY < targetY) { // Movendo para o norte (90°)
+            alignOrientation(90);
+            segue_frente_cm(targetY-currentY);
+        } else if (currentY > targetY) { // Movendo para o sul (270°)
+            alignOrientation(270);
+            segue_frente_cm(currentY-targetY);
+        }
+
+        // Atualize a posição atual
+        currentX = targetX;
+        currentY = targetY;
+        PlayTone(1000, 500); // ALINHEI UM PONTO
+        ClearScreen();
+  	Wait(SEC_1);
+    }
+
+    PlayTone(1000, 500); // Emitir um som ao completar a trajetória
+    Off(MOTOR_ED);
+}
