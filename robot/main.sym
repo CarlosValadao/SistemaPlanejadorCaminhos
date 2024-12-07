@@ -1,0 +1,1580 @@
+#SYMBOLS
+Index	Identifier	Type	Flag	Data	Size	RefCount
+0	__signed_stack_001cosseno	6	1	0	4	8
+1	__signed_stack_001executa_trajetoria	6	1	4	4	36
+2	__signed_stack_002calcula_deslocamento	6	1	8	4	6
+3	__float_stack_002calcula_deslocamento	10	1	12	4	10
+4	__signed_stack_002executa_trajetoria	6	1	16	4	14
+5	__signed_stack_002girar_eixo_v3	6	1	20	4	26
+6	__signed_stack_003girar_eixo_v3	6	1	24	4	12
+7	__signed_stack_003executa_trajetoria	6	1	28	4	6
+8	__signed_stack_001girar_eixo_v3	6	1	32	4	40
+9	__signed_stack_001calcula_deslocamento	6	1	36	4	10
+10	__D0seno	6	1	40	4	22
+11	__DF0seno	10	1	44	4	5
+12	__D0segue_frente_cm	6	1	48	4	6
+13	__DF0segue_frente_cm	10	1	52	4	2
+14	__D0SetSensorLight_inline_configureSensors	6	1	56	4	2
+15	__DU0SetSensorLowspeed_inline_SetSensorUltrasonic	5	1	60	4	5
+16	__signed_stack_001alinharOrientacao	6	1	64	4	6
+17	__DU0SetSensorLight_inline_configureSensors	5	1	68	4	5
+18	__D0SetSensorLowspeed_inline_SetSensorUltrasonic	6	1	72	4	2
+19	__signed_stack_004girar_eixo_v3	6	1	76	4	10
+20	__calcula_deslocamento_7qG2_RD_Atual_7qG2_000	6	1	80	4	3
+21	__calcula_deslocamento_7qG2_RE_Atual_7qG2_000	6	1	84	4	3
+22	__calcula_deslocamento_7qG2_desloc_grau_7qG2_000	6	1	88	4	2
+23	__girar_eixo_v3_7qG2_graus_curva_7qG2_000	6	1	92	4	3
+24	__Wait_7qG2_ms_7qG2_000_inline_odometria	5	1	96	4	2
+25	RobotInOperationMutex	9	0	100	4	2
+26	mutexDeslocamento	9	0	104	4	14
+27	gr_ant_RE	6	1	108	4	3
+28	gr_ant_RD	6	1	112	4	3
+29	__segue_frente_cm_7qG2_cm_7qG2_000	10	1	116	4	5
+30	__signed_stack_001muda_bussola	6	1	120	4	12
+31	__signed_stack_001segue_frente_cm	6	1	124	4	6
+32	__float_stack_001girar_eixo_v3	10	1	128	4	2
+33	__signed_stack_001main	6	1	132	4	4
+34	__signed_stack_002segue_frente_cm	6	1	136	4	2
+35	__float_stack_001segue_frente_cm	10	1	140	4	4
+36	__signed_stack_001seno	6	1	144	4	8
+37	__signed_stack_003segue_frente_cm	6	1	148	4	2
+38	__signed_stack_004segue_frente_cm	6	1	152	4	2
+39	__girar_eixo_v3_7qG2_passo_direito_7qG2_000	6	1	156	4	4
+40	__girar_eixo_v3_7qG2_passo_esquerdo_7qG2_000	6	1	160	4	4
+41	__IOMWMutex	9	0	164	4	2
+42	__Wait_7qG2_ms_7qG2_000_inline_girar_eixo_v3	5	1	168	4	2
+43	__girar_eixo_v3_7qG2_grau_giro_roda_7qG2_000	6	1	172	4	3
+44	__alinharOrientacao_7qG2_diff_7qG2_000	6	1	176	4	5
+45	__constValf5P6	10	0	180	4	1
+46	__constValf16P8	10	0	184	4	1
+47	__Wait_7qG2_ms_7qG2_000_inline_segue_frente_cm	5	1	188	4	2
+48	__TextOutMutex	9	0	192	4	8
+49	__constVal786433	6	0	196	4	1
+50	__Wait_7qG2_ms_7qG2_000_inline_executa_trajetoria	5	1	200	4	4
+51	__PointOutMutex	9	0	204	4	2
+52	__segue_frente_cm_7qG2_passo_7qG2_000	6	1	208	4	2
+53	__segue_frente_cm_7qG2_grau_7qG2_000	6	1	212	4	2
+54	__constValf17P5929208	10	0	216	4	1
+55	__constValf2P8	10	0	220	4	1
+56	__D0girar_eixo_v3	6	1	224	4	68
+57	__D0main	6	1	228	4	6
+58	__calcula_deslocamento_7qG2_desloc_cm_7qG2_000	10	1	232	4	3
+59	__DF0executa_trajetoria	10	1	236	4	4
+60	__D0odometria	6	1	240	4	6
+61	__DU0odometria	5	1	244	4	2
+62	__DU0main	5	1	248	4	4
+63	__D0muda_bussola	6	1	252	4	20
+64	__D0executa_trajetoria	6	1	256	4	35
+65	__D0alinharOrientacao	6	1	260	4	14
+66	__constValf3P141593	10	0	264	4	1
+67	__SPTArgsMutex	9	0	268	4	2
+68	__D0calcula_deslocamento	6	1	272	4	4
+69	__DF0cosseno	10	1	276	4	5
+70	__D0cosseno	6	1	280	4	22
+71	__DF0calcula_deslocamento	10	1	284	4	12
+72	__executa_trajetoria_7qG2_targetY_7qG2_002	4	1	288	2	5
+73	__alinharOrientacao_7qG2_targetOrientation_7qG2_000	4	1	290	2	6
+74	__executa_trajetoria_7qG2_targetX_7qG2_002	4	1	292	2	5
+75	__executa_trajetoria_7qG2_currentX_7qG2_000	4	1	294	2	6
+76	__executa_trajetoria_7qG2_currentY_7qG2_000	4	1	296	2	6
+77	__executa_trajetoria_7qG2_i_7qG2_001	4	1	298	2	6
+78	__seno_7qG2_grau_7qG2_000	4	1	300	2	5
+79	__cosseno_7qG2_grau_7qG2_000	4	1	302	2	5
+80	__girar_eixo_v3_7qG2_turn_pct_7qG2_000	4	1	304	2	11
+81	__constVal360	4	0	306	2	2
+82	__constVal200	4	0	308	2	2
+83	__muda_bussola_7qG2_turn_pct_7qG2_000	4	1	310	2	3
+84	orientacao	4	1	312	2	13
+85	__constVal100	2	0	314	1	1
+86	__constValNeg100	2	0	315	1	3
+87	__constVal63	2	0	316	1	13
+88	__constVal10	2	0	317	1	1
+89	__girar_eixo_v3_return	1	1	318	1	4
+90	RobotInOperation	1	1	319	1	3
+91	____initialize_global_data_return	1	1	320	1	3
+92	__constVal7	2	0	321	1	6
+93	__alinharOrientacao_return	1	1	322	1	6
+94	__constVal96	2	0	323	1	7
+95	__ResetSensorPort	1	1	324	1	5
+96	__ResetSensorTmp	1	1	325	1	2
+97	__constVal3	2	0	326	1	7
+98	__constVal1	2	0	327	1	18
+99	__constVal0	2	1	328	1	46
+100	__segue_frente_cm_return	1	1	329	1	6
+101	__constVal32	2	0	330	1	28
+102	__constVal2	2	0	331	1	8
+103	__executa_trajetoria_return	1	1	332	1	3
+104	____ResetSensorSubroutine_return	1	1	333	1	5
+105	__constVal36	2	0	334	1	1
+106	__SetSensorType_7qG2_port_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors	1	1	335	1	2
+107	__SetSensorLowspeed_7qG2_bIsPowered_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors	1	1	336	1	2
+108	__SetSensorLowspeed_7qG2_port_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors	1	1	337	1	4
+109	__SetSensorMode_7qG2_mode_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors	1	1	338	1	2
+110	__SetSensorMode_7qG2_port_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors	1	1	339	1	2
+111	__SetSensorType_7qG2_type_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors	1	1	340	1	2
+112	__cosseno_return	1	1	341	1	7
+113	__constValNeg1	2	0	342	1	2
+114	__seno_return	1	1	343	1	7
+115	__SetSensorUltrasonic_7qG2_port_7qG2_000_inline_configureSensors	1	1	344	1	2
+116	__SetSensorTouch_7qG2_port_7qG2_000_inline_configureSensors	1	1	345	1	4
+117	__configureSensors_return	1	1	346	1	3
+118	__muda_bussola_return	1	1	347	1	3
+119	__SetSensorType_7qG2_type_7qG2_000_inline_SetSensorLight_inline_configureSensors	1	1	348	1	2
+120	__SetSensorMode_7qG2_mode_7qG2_000_inline_SetSensorLight_inline_configureSensors	1	1	349	1	2
+121	__SetSensorMode_7qG2_port_7qG2_000_inline_SetSensorLight_inline_configureSensors	1	1	350	1	2
+122	__SetSensorType_7qG2_port_7qG2_000_inline_SetSensorLight_inline_configureSensors	1	1	351	1	2
+123	__SetSensorLight_7qG2_port_7qG2_000_inline_configureSensors	1	1	352	1	4
+124	__calcula_deslocamento_return	1	1	353	1	4
+125	__constValNeg90	2	0	354	1	1
+126	__SetSensorLight_7qG2_bActive_7qG2_000_inline_configureSensors	1	1	355	1	2
+127	__SPTArgs	8	0	5	8	6
+128	__SPTArgs.Result	2	1	356	1	6
+129	__SPTArgs.Frequency	3	1	358	2	6
+130	__SPTArgs.Duration	3	1	360	2	6
+131	__SPTArgs.Loop	1	1	362	1	6
+132	__SPTArgs.Volume	1	1	363	1	6
+133	__IOMWBIArgs	8	0	4	16	4
+134	__IOMWBIArgs.Result	2	1	364	1	4
+135	__IOMWBIArgs.ModuleID	5	1	368	4	4
+136	__IOMWBIArgs.Offset	3	1	372	2	4
+137	__IOMWBIArgs.Buffer	7	0	374	4	4
+138	__IOMWBIArgs.Buffer.Buffer_type	1	0	0	1	0
+139	__PointOutArgs	8	0	3	12	4
+140	__PointOutArgs.Result	2	1	376	1	4
+141	__PointOutArgs.Location	8	0	2	4	4
+142	__PointOutArgs.Location.X	4	1	380	2	4
+143	__PointOutArgs.Location.Y	4	1	382	2	4
+144	__PointOutArgs.Options	5	1	384	4	4
+145	__TextOutArgs	8	0	4	16	24
+146	__TextOutArgs.Result	2	1	388	1	24
+147	__TextOutArgs.Location	8	0	2	4	24
+148	__TextOutArgs.Location.X	4	1	392	2	24
+149	__TextOutArgs.Location.Y	4	1	394	2	24
+150	__TextOutArgs.Text	7	0	396	4	24
+151	__TextOutArgs.Text.Text_type	1	0	0	1	0
+152	__TextOutArgs.Options	5	1	400	4	24
+153	__constStr0016	7	0	404	4	1
+154	__constStr0016.__constStr0016_type	1	1	0	1	0
+155	__coordinates_2	7	0	406	4	2
+156	__coordinates_2.__coordinates_2_type	4	0	0	2	0
+157	__OUT_AB	7	0	408	4	5
+158	__OUT_AB.__OUT_AB_type	1	0	0	1	0
+159	__strbufexecuta_trajetoria	7	0	410	4	4
+160	__strbufexecuta_trajetoria.__strbufexecuta_trajetoria_type	1	0	0	1	0
+161	coordinates	7	0	412	4	3
+162	coordinates.coordinates_type	7	0	0	4	0
+163	coordinates.coordinates_type.coordinates_type_type	4	0	0	2	0
+164	deslocamento	7	0	414	4	15
+165	deslocamento.deslocamento_type	10	0	0	4	0
+166	__constStr0015	7	0	416	4	1
+167	__constStr0015.__constStr0015_type	1	1	0	1	0
+168	__IOMWFlattenBuf	7	0	418	4	2
+169	__IOMWFlattenBuf.__IOMWFlattenBuf_type	1	0	0	1	0
+170	__ArrHelper__executa_trajetoria_236_0	7	0	420	4	4
+171	__ArrHelper__executa_trajetoria_236_0.__ArrHelper__executa_trajetoria_236_0_type	4	0	0	2	0
+#SOURCES
+Clump	Line	PC	Source
+0	375	0	#line 375 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	376	0		subcall __initialize_global_data, ____initialize_global_data_return
+0	375	2	#line 375 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	375	2	#line 375 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	376	2	#pragma macro 8
+0	376	2		acquire __IOMWMutex
+0	376	3		mov __IOMWBIArgs.ModuleID, __constVal786433
+0	376	5		mov __IOMWBIArgs.Offset, __constVal36
+0	376	7		flatten __IOMWFlattenBuf, __constVal100
+0	376	10		strtoarr __IOMWBIArgs.Buffer, __IOMWFlattenBuf
+0	376	13		syscall 79, __IOMWBIArgs
+0	376	16		release __IOMWMutex
+0	11727	17	#line 11727 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	375	17	#line 375 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	375	17	#line 375 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	378	17	#line 378 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	379	17		set orientacao, 90
+0	378	20	#line 378 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	378	20	#line 378 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	378	20	#line 378 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	379	20		set __signed_stack_001main, 0
+0	378	23	#line 378 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	379	23	#line 379 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	380	23		set __D0main, 0
+0	379	26	#line 379 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	380	26		replace deslocamento, deslocamento, __signed_stack_001main, __D0main
+0	379	31	#line 379 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	379	31	#line 379 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	380	31		set __signed_stack_001main, 1
+0	379	34	#line 379 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	380	34	#line 380 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	381	34		set __D0main, 0
+0	380	37	#line 380 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	381	37		replace deslocamento, deslocamento, __signed_stack_001main, __D0main
+0	380	42	#line 380 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	381	42	#line 381 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	382	42		set RobotInOperation, 0
+0	381	45	#line 381 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	381	45	#line 381 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	382	45	#line 382 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	383	45		getout gr_ant_RE, __constVal0, 14
+0	382	49	#line 382 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	382	49	#line 382 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	384	49	#line 384 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	385	49		getout gr_ant_RD, __constVal1, 14
+0	384	53	#line 384 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	384	53	#line 384 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	388	53	#line 388 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	389	53		subcall configureSensors, __configureSensors_return
+0	388	55	#line 388 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	390	55	#line 390 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	391	55		start odometria
+0	390	57	#line 390 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	390	57	#line 390 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	391	57		mov __DU0main, RobotInOperation
+0	390	59	#line 390 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	391	59		not __DU0main, __DU0main
+0	394	62	#line 394 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	395	62		tst 5, __D0main, __DU0main
+0	394	65	#line 394 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	395	65		brtst 4, __ASM_Label_1164, __D0main
+0	394	68	#line 394 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	394	68	#line 394 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	395	68		jmp __ASM_Label_1163
+0	394	70	#line 394 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	396	70	#line 396 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	397	70		subcall executa_trajetoria, __executa_trajetoria_return
+0	396	72	#line 396 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+0	397	72		exit -1, -1
+1	5476	0		setin __constVal1, __ResetSensorPort, 5
+1	5478	4		getin __ResetSensorTmp, __ResetSensorPort, 5
+1	5479	8		brtst 5, __SensorStillInvalid, __ResetSensorTmp
+1	5480	11		subret ____ResetSensorSubroutine_return
+2	109	0	#line 109 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	110	0		set __D0odometria, 1
+2	110	3	#line 110 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	111	3		tst 5, __D0odometria, __D0odometria
+2	110	6	#line 110 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	111	6		brtst 4, __ASM_Label_678, __D0odometria
+2	111	9	#line 111 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	112	9		acquire RobotInOperationMutex
+2	111	10	#line 111 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	111	10	#line 111 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	112	10		mov __DU0odometria, RobotInOperation
+2	113	12	#line 113 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	114	12		tst 5, __D0odometria, __DU0odometria
+2	113	15	#line 113 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	114	15		brtst 4, __ASM_Label_683, __D0odometria
+2	114	18	#line 114 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	115	18		acquire mutexDeslocamento
+2	114	19	#line 114 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	115	19	#line 115 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	116	19		subcall calcula_deslocamento, __calcula_deslocamento_return
+2	115	21	#line 115 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	116	21	#line 116 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	117	21		release mutexDeslocamento
+2	116	22	#line 116 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	116	22	#line 116 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	117	22		set __Wait_7qG2_ms_7qG2_000_inline_odometria, 500
+2	116	25	#line 116 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	8551	25	#line 8551 "NXCDefs.h"
+2	8552	25		waitv __Wait_7qG2_ms_7qG2_000_inline_odometria
+2	8551	27	#line 8551 "NXCDefs.h"
+2	117	27	#line 117 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	118	27	#line 118 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	119	27	#line 119 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	120	27		release RobotInOperationMutex
+2	119	28	#line 119 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	122	28	#line 122 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	123	28		jmp __ASM_Label_677
+2	122	30	#line 122 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+2	123	30		exit -1, -1
+3	192	0	#line 192 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	193	0		mov __signed_stack_001seno, __seno_7qG2_grau_7qG2_000
+3	192	2	#line 192 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	192	2	#line 192 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	193	2		set __D0seno, 0
+3	192	5	#line 192 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	193	5		cmp 4, __D0seno, __signed_stack_001seno, __D0seno
+3	192	9	#line 192 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	193	9		brtst 4, __ASM_Label_777, __D0seno
+3	193	12	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	12		set __D0seno, 0
+3	193	15	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	15		mov __DF0seno, __D0seno
+3	193	17	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	17		subret __seno_return
+3	193	19	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	193	19	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	19		jmp __ASM_Label_780
+3	193	21	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	21		mov __signed_stack_001seno, __seno_7qG2_grau_7qG2_000
+3	193	23	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	193	23	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	23		set __D0seno, 90
+3	193	26	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	26		cmp 4, __D0seno, __signed_stack_001seno, __D0seno
+3	193	30	#line 193 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	30		brtst 4, __ASM_Label_783, __D0seno
+3	194	33	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	33		set __D0seno, 1
+3	194	36	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	36		mov __DF0seno, __D0seno
+3	194	38	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	38		subret __seno_return
+3	194	40	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	40	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	40		jmp __ASM_Label_786
+3	194	42	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	42		mov __signed_stack_001seno, __seno_7qG2_grau_7qG2_000
+3	194	44	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	194	44	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	44		set __D0seno, 180
+3	194	47	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	47		cmp 4, __D0seno, __signed_stack_001seno, __D0seno
+3	194	51	#line 194 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	51		brtst 4, __ASM_Label_789, __D0seno
+3	195	54	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	54		set __D0seno, 0
+3	195	57	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	57		mov __DF0seno, __D0seno
+3	195	59	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	59		subret __seno_return
+3	195	61	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	61	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	61		jmp __ASM_Label_792
+3	195	63	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	63		mov __signed_stack_001seno, __seno_7qG2_grau_7qG2_000
+3	195	65	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	195	65	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	65		set __D0seno, 270
+3	195	68	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	68		cmp 4, __D0seno, __signed_stack_001seno, __D0seno
+3	195	72	#line 195 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	72		brtst 4, __ASM_Label_795, __D0seno
+3	196	75	#line 196 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	197	75		mov __DF0seno, __constValNeg1
+3	196	77	#line 196 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	196	77	#line 196 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	197	77		subret __seno_return
+3	196	79	#line 196 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	197	79	#line 197 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	197	79	#line 197 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	197	79	#line 197 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	197	79	#line 197 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	197	79	#line 197 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+3	198	79		subret __seno_return
+4	198	0	#line 198 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	199	0		mov __signed_stack_001cosseno, __cosseno_7qG2_grau_7qG2_000
+4	198	2	#line 198 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	198	2	#line 198 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	199	2		set __D0cosseno, 0
+4	198	5	#line 198 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	199	5		cmp 4, __D0cosseno, __signed_stack_001cosseno, __D0cosseno
+4	198	9	#line 198 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	199	9		brtst 4, __ASM_Label_800, __D0cosseno
+4	199	12	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	12		set __D0cosseno, 1
+4	199	15	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	15		mov __DF0cosseno, __D0cosseno
+4	199	17	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	17		subret __cosseno_return
+4	199	19	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	199	19	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	19		jmp __ASM_Label_803
+4	199	21	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	21		mov __signed_stack_001cosseno, __cosseno_7qG2_grau_7qG2_000
+4	199	23	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	199	23	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	23		set __D0cosseno, 90
+4	199	26	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	26		cmp 4, __D0cosseno, __signed_stack_001cosseno, __D0cosseno
+4	199	30	#line 199 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	30		brtst 4, __ASM_Label_806, __D0cosseno
+4	200	33	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	33		set __D0cosseno, 0
+4	200	36	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	36		mov __DF0cosseno, __D0cosseno
+4	200	38	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	38		subret __cosseno_return
+4	200	40	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	40	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	40		jmp __ASM_Label_809
+4	200	42	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	42		mov __signed_stack_001cosseno, __cosseno_7qG2_grau_7qG2_000
+4	200	44	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	200	44	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	44		set __D0cosseno, 180
+4	200	47	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	47		cmp 4, __D0cosseno, __signed_stack_001cosseno, __D0cosseno
+4	200	51	#line 200 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	51		brtst 4, __ASM_Label_812, __D0cosseno
+4	201	54	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	202	54		mov __DF0cosseno, __constValNeg1
+4	201	56	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	56	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	202	56		subret __cosseno_return
+4	201	58	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	58	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	202	58		jmp __ASM_Label_815
+4	201	60	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	202	60		mov __signed_stack_001cosseno, __cosseno_7qG2_grau_7qG2_000
+4	201	62	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	201	62	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	202	62		set __D0cosseno, 270
+4	201	65	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	202	65		cmp 4, __D0cosseno, __signed_stack_001cosseno, __D0cosseno
+4	201	69	#line 201 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	202	69		brtst 4, __ASM_Label_818, __D0cosseno
+4	202	72	#line 202 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	203	72		set __D0cosseno, 0
+4	202	75	#line 202 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	203	75		mov __DF0cosseno, __D0cosseno
+4	202	77	#line 202 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	203	77		subret __cosseno_return
+4	202	79	#line 202 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	204	79	#line 204 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	204	79	#line 204 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	204	79	#line 204 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	204	79	#line 204 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	204	79	#line 204 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+4	205	79		subret __cosseno_return
+5	205	0	#line 205 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	206	0		set __SetSensorTouch_7qG2_port_7qG2_000_inline_configureSensors, 2
+5	205	3	#line 205 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	4302	3	#line 4302 "NXCDefs.h"
+5	4303	3	#pragma macro 6
+5	4303	3		setin __constVal1, __SetSensorTouch_7qG2_port_7qG2_000_inline_configureSensors, 0
+5	4303	7		setin __constVal32, __SetSensorTouch_7qG2_port_7qG2_000_inline_configureSensors, 1
+5	4303	11		mov __ResetSensorPort, __SetSensorTouch_7qG2_port_7qG2_000_inline_configureSensors
+5	4303	13		subcall __ResetSensorSubroutine, ____ResetSensorSubroutine_return
+5	9805	15	#line 9805 "NXCDefs.h"
+5	4302	15	#line 4302 "NXCDefs.h"
+5	206	15	#line 206 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	206	15	#line 206 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	207	15		set __SetSensorUltrasonic_7qG2_port_7qG2_000_inline_configureSensors, 3
+5	206	18	#line 206 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	4352	18	#line 4352 "NXCDefs.h"
+5	4353	18		mov __SetSensorLowspeed_7qG2_port_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors, __SetSensorUltrasonic_7qG2_port_7qG2_000_inline_configureSensors
+5	4352	20	#line 4352 "NXCDefs.h"
+5	4352	20	#line 4352 "NXCDefs.h"
+5	4353	20		mov __SetSensorLowspeed_7qG2_bIsPowered_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors, __constVal1
+5	4342	22	#line 4342 "NXCDefs.h"
+5	4343	22		mov __SetSensorType_7qG2_port_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, __SetSensorLowspeed_7qG2_port_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors
+5	4342	24	#line 4342 "NXCDefs.h"
+5	4342	24	#line 4342 "NXCDefs.h"
+5	4343	24		mov __DU0SetSensorLowspeed_inline_SetSensorUltrasonic, __SetSensorLowspeed_7qG2_bIsPowered_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors
+5	4342	26	#line 4342 "NXCDefs.h"
+5	4343	26		tst 5, __D0SetSensorLowspeed_inline_SetSensorUltrasonic, __DU0SetSensorLowspeed_inline_SetSensorUltrasonic
+5	4342	29	#line 4342 "NXCDefs.h"
+5	4343	29		brtst 4, __001__001__ASM_Label_36, __D0SetSensorLowspeed_inline_SetSensorUltrasonic
+5	4342	32	#line 4342 "NXCDefs.h"
+5	4343	32		set __DU0SetSensorLowspeed_inline_SetSensorUltrasonic, 11
+5	4342	35	#line 4342 "NXCDefs.h"
+5	4342	35	#line 4342 "NXCDefs.h"
+5	4343	35		jmp __001__001__ASM_Label_37
+5	4342	37	#line 4342 "NXCDefs.h"
+5	4343	37		set __DU0SetSensorLowspeed_inline_SetSensorUltrasonic, 10
+5	4342	40	#line 4342 "NXCDefs.h"
+5	4342	40	#line 4342 "NXCDefs.h"
+5	4343	40		mov __SetSensorType_7qG2_type_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, __DU0SetSensorLowspeed_inline_SetSensorUltrasonic
+5	4247	42	#line 4247 "NXCDefs.h"
+5	4248	42		setin __SetSensorType_7qG2_type_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, __SetSensorType_7qG2_port_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, 0
+5	4247	46	#line 4247 "NXCDefs.h"
+5	4343	46	#line 4343 "NXCDefs.h"
+5	4343	46	#line 4343 "NXCDefs.h"
+5	4344	46		mov __SetSensorMode_7qG2_port_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, __SetSensorLowspeed_7qG2_port_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors
+5	4343	48	#line 4343 "NXCDefs.h"
+5	4343	48	#line 4343 "NXCDefs.h"
+5	4344	48		set __SetSensorMode_7qG2_mode_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, 0
+5	4343	51	#line 4343 "NXCDefs.h"
+5	4260	51	#line 4260 "NXCDefs.h"
+5	4261	51		setin __SetSensorMode_7qG2_mode_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, __SetSensorMode_7qG2_port_7qG2_000_inline_SetSensorLowspeed_inline_SetSensorUltrasonic_inline_configureSensors, 1
+5	4260	55	#line 4260 "NXCDefs.h"
+5	4344	55	#line 4344 "NXCDefs.h"
+5	4344	55	#line 4344 "NXCDefs.h"
+5	4344	55	#line 4344 "NXCDefs.h"
+5	4278	55	#line 4278 "NXCDefs.h"
+5	4279	55	#pragma macro 4
+5	4279	55		mov __ResetSensorPort, __SetSensorLowspeed_7qG2_port_7qG2_000_inline_SetSensorUltrasonic_inline_configureSensors
+5	4279	57		subcall __ResetSensorSubroutine, ____ResetSensorSubroutine_return
+5	9905	59	#line 9905 "NXCDefs.h"
+5	4278	59	#line 4278 "NXCDefs.h"
+5	4345	59	#line 4345 "NXCDefs.h"
+5	4352	59	#line 4352 "NXCDefs.h"
+5	207	59	#line 207 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	207	59	#line 207 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	208	59		set __SetSensorLight_7qG2_port_7qG2_000_inline_configureSensors, 1
+5	207	62	#line 207 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	208	62	#line 208 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	209	62		mov __SetSensorLight_7qG2_bActive_7qG2_000_inline_configureSensors, __constVal1
+5	4313	64	#line 4313 "NXCDefs.h"
+5	4314	64		mov __SetSensorType_7qG2_port_7qG2_000_inline_SetSensorLight_inline_configureSensors, __SetSensorLight_7qG2_port_7qG2_000_inline_configureSensors
+5	4313	66	#line 4313 "NXCDefs.h"
+5	4313	66	#line 4313 "NXCDefs.h"
+5	4314	66		mov __DU0SetSensorLight_inline_configureSensors, __SetSensorLight_7qG2_bActive_7qG2_000_inline_configureSensors
+5	4313	68	#line 4313 "NXCDefs.h"
+5	4314	68		tst 5, __D0SetSensorLight_inline_configureSensors, __DU0SetSensorLight_inline_configureSensors
+5	4313	71	#line 4313 "NXCDefs.h"
+5	4314	71		brtst 4, __001__ASM_Label_4, __D0SetSensorLight_inline_configureSensors
+5	4313	74	#line 4313 "NXCDefs.h"
+5	4314	74		set __DU0SetSensorLight_inline_configureSensors, 5
+5	4313	77	#line 4313 "NXCDefs.h"
+5	4313	77	#line 4313 "NXCDefs.h"
+5	4314	77		jmp __001__ASM_Label_5
+5	4313	79	#line 4313 "NXCDefs.h"
+5	4314	79		set __DU0SetSensorLight_inline_configureSensors, 6
+5	4313	82	#line 4313 "NXCDefs.h"
+5	4313	82	#line 4313 "NXCDefs.h"
+5	4314	82		mov __SetSensorType_7qG2_type_7qG2_000_inline_SetSensorLight_inline_configureSensors, __DU0SetSensorLight_inline_configureSensors
+5	4247	84	#line 4247 "NXCDefs.h"
+5	4248	84		setin __SetSensorType_7qG2_type_7qG2_000_inline_SetSensorLight_inline_configureSensors, __SetSensorType_7qG2_port_7qG2_000_inline_SetSensorLight_inline_configureSensors, 0
+5	4247	88	#line 4247 "NXCDefs.h"
+5	4314	88	#line 4314 "NXCDefs.h"
+5	4314	88	#line 4314 "NXCDefs.h"
+5	4315	88		mov __SetSensorMode_7qG2_port_7qG2_000_inline_SetSensorLight_inline_configureSensors, __SetSensorLight_7qG2_port_7qG2_000_inline_configureSensors
+5	4314	90	#line 4314 "NXCDefs.h"
+5	4314	90	#line 4314 "NXCDefs.h"
+5	4315	90		set __SetSensorMode_7qG2_mode_7qG2_000_inline_SetSensorLight_inline_configureSensors, 128
+5	4314	93	#line 4314 "NXCDefs.h"
+5	4260	93	#line 4260 "NXCDefs.h"
+5	4261	93		setin __SetSensorMode_7qG2_mode_7qG2_000_inline_SetSensorLight_inline_configureSensors, __SetSensorMode_7qG2_port_7qG2_000_inline_SetSensorLight_inline_configureSensors, 1
+5	4260	97	#line 4260 "NXCDefs.h"
+5	4315	97	#line 4315 "NXCDefs.h"
+5	4315	97	#line 4315 "NXCDefs.h"
+5	4315	97	#line 4315 "NXCDefs.h"
+5	4278	97	#line 4278 "NXCDefs.h"
+5	4279	97	#pragma macro 4
+5	4279	97		mov __ResetSensorPort, __SetSensorLight_7qG2_port_7qG2_000_inline_configureSensors
+5	4279	99		subcall __ResetSensorSubroutine, ____ResetSensorSubroutine_return
+5	9997	101	#line 9997 "NXCDefs.h"
+5	4278	101	#line 4278 "NXCDefs.h"
+5	4316	101	#line 4316 "NXCDefs.h"
+5	208	101	#line 208 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	210	101	#line 210 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+5	211	101		subret __configureSensors_return
+6	213	0	#line 213 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	214	0		acquire mutexDeslocamento
+6	213	1	#line 213 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	213	1	#line 213 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	214	1		mov __signed_stack_001muda_bussola, __muda_bussola_7qG2_turn_pct_7qG2_000
+6	213	3	#line 213 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	213	3	#line 213 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	214	3		set __D0muda_bussola, 100
+6	213	6	#line 213 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	214	6		cmp 4, __D0muda_bussola, __signed_stack_001muda_bussola, __D0muda_bussola
+6	214	10	#line 214 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	215	10		brtst 4, __ASM_Label_829, __D0muda_bussola
+6	214	13	#line 214 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	215	13		mov __signed_stack_001muda_bussola, orientacao
+6	214	15	#line 214 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	215	15	#line 215 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	216	15		set __D0muda_bussola, 90
+6	215	18	#line 215 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	216	18		sub orientacao, __signed_stack_001muda_bussola, __D0muda_bussola
+6	215	22	#line 215 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	215	22	#line 215 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	217	22	#line 217 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	218	22		jmp __ASM_Label_832
+6	217	24	#line 217 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	218	24		mov __signed_stack_001muda_bussola, __muda_bussola_7qG2_turn_pct_7qG2_000
+6	217	26	#line 217 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	217	26	#line 217 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	218	26		mov __D0muda_bussola, __constValNeg100
+6	217	28	#line 217 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	218	28		cmp 4, __D0muda_bussola, __signed_stack_001muda_bussola, __D0muda_bussola
+6	218	32	#line 218 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	219	32		brtst 4, __ASM_Label_835, __D0muda_bussola
+6	218	35	#line 218 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	219	35		mov __signed_stack_001muda_bussola, orientacao
+6	218	37	#line 218 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	219	37	#line 219 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	220	37		set __D0muda_bussola, 90
+6	219	40	#line 219 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	220	40		add orientacao, __signed_stack_001muda_bussola, __D0muda_bussola
+6	219	44	#line 219 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	219	44	#line 219 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	220	44	#line 220 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	220	44	#line 220 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	220	44	#line 220 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	44		mov __signed_stack_001muda_bussola, orientacao
+6	220	46	#line 220 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	220	46	#line 220 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	46		set __D0muda_bussola, 360
+6	220	49	#line 220 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	49		cmp 4, __D0muda_bussola, __signed_stack_001muda_bussola, __D0muda_bussola
+6	220	53	#line 220 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	53		brtst 4, __ASM_Label_840, __D0muda_bussola
+6	221	56	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	222	56		set orientacao, 0
+6	221	59	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	59	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	59	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	59	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	222	59		mov __signed_stack_001muda_bussola, orientacao
+6	221	61	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	221	61	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	222	61		mov __D0muda_bussola, __constValNeg90
+6	221	63	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	222	63		cmp 4, __D0muda_bussola, __signed_stack_001muda_bussola, __D0muda_bussola
+6	221	67	#line 221 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	222	67		brtst 4, __ASM_Label_845, __D0muda_bussola
+6	222	70	#line 222 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	223	70		set orientacao, 270
+6	222	73	#line 222 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	222	73	#line 222 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	222	73	#line 222 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	223	73	#line 223 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	224	73		release mutexDeslocamento
+6	223	74	#line 223 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	225	74	#line 225 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+6	226	74		subret __muda_bussola_return
+7	228	0	#line 228 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	229	0		getout __calcula_deslocamento_7qG2_RE_Atual_7qG2_000, __constVal0, 14
+7	228	4	#line 228 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	4	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	4		getout __calcula_deslocamento_7qG2_RD_Atual_7qG2_000, __constVal1, 14
+7	230	8	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	8	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	8	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	8	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	8	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	8		sub __signed_stack_001calcula_deslocamento, __calcula_deslocamento_7qG2_RE_Atual_7qG2_000, gr_ant_RE
+7	230	12	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	12	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	12	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	12	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	230	12	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	12		sub __D0calcula_deslocamento, __calcula_deslocamento_7qG2_RD_Atual_7qG2_000, gr_ant_RD
+7	230	16	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	16		add __signed_stack_001calcula_deslocamento, __signed_stack_001calcula_deslocamento, __D0calcula_deslocamento
+7	230	20	#line 230 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	20	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	20		set __D0calcula_deslocamento, 2
+7	231	23	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	23		div __calcula_deslocamento_7qG2_desloc_grau_7qG2_000, __signed_stack_001calcula_deslocamento, __D0calcula_deslocamento
+7	231	27	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	27	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	27		set __signed_stack_001calcula_deslocamento, 0
+7	231	30	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	30	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	30		set __signed_stack_002calcula_deslocamento, 2
+7	231	33	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	33	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	33	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	33		mul __float_stack_002calcula_deslocamento, __signed_stack_002calcula_deslocamento, __constValf3P141593
+7	231	37	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	37	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	37	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	37		mul __float_stack_002calcula_deslocamento, __float_stack_002calcula_deslocamento, __constValf2P8
+7	231	41	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	41	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	41	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	41		mul __float_stack_002calcula_deslocamento, __float_stack_002calcula_deslocamento, __calcula_deslocamento_7qG2_desloc_grau_7qG2_000
+7	231	45	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	231	45	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	45		mov __DF0calcula_deslocamento, __constVal360
+7	231	47	#line 231 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	232	47		div __DF0calcula_deslocamento, __float_stack_002calcula_deslocamento, __DF0calcula_deslocamento
+7	233	51	#line 233 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	234	51		sub __calcula_deslocamento_7qG2_desloc_cm_7qG2_000, __signed_stack_001calcula_deslocamento, __DF0calcula_deslocamento
+7	233	55	#line 233 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	234	55	#line 234 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	235	55		mov gr_ant_RE, __calcula_deslocamento_7qG2_RE_Atual_7qG2_000
+7	234	57	#line 234 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	234	57	#line 234 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	57	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	238	57		mov gr_ant_RD, __calcula_deslocamento_7qG2_RD_Atual_7qG2_000
+7	237	59	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	59	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	59	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	238	59		set __signed_stack_001calcula_deslocamento, 0
+7	237	62	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	62	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	238	62		set __signed_stack_002calcula_deslocamento, 0
+7	237	65	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	65	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	238	65		index __float_stack_002calcula_deslocamento, deslocamento, __signed_stack_002calcula_deslocamento
+7	237	69	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	69	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	69	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	238	69		mov __cosseno_7qG2_grau_7qG2_000, orientacao
+7	237	71	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	71	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	238	71		subcall cosseno, __cosseno_return
+7	237	73	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	237	73	#line 237 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	73	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	73	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	73		mul __DF0calcula_deslocamento, __DF0cosseno, __calcula_deslocamento_7qG2_desloc_cm_7qG2_000
+7	239	77	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	77		add __DF0calcula_deslocamento, __float_stack_002calcula_deslocamento, __DF0calcula_deslocamento
+7	239	81	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	81		replace deslocamento, deslocamento, __signed_stack_001calcula_deslocamento, __DF0calcula_deslocamento
+7	239	86	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	86	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	86		set __signed_stack_001calcula_deslocamento, 1
+7	239	89	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	89	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	89		set __signed_stack_002calcula_deslocamento, 1
+7	239	92	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	92	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	92		index __float_stack_002calcula_deslocamento, deslocamento, __signed_stack_002calcula_deslocamento
+7	239	96	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	96	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	96	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	96		mov __seno_7qG2_grau_7qG2_000, orientacao
+7	239	98	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	98	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	98		subcall seno, __seno_return
+7	239	100	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	239	100	#line 239 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	100	#line 240 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	240	100	#line 240 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	241	100		mul __DF0calcula_deslocamento, __DF0seno, __calcula_deslocamento_7qG2_desloc_cm_7qG2_000
+7	240	104	#line 240 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	241	104		add __DF0calcula_deslocamento, __float_stack_002calcula_deslocamento, __DF0calcula_deslocamento
+7	240	108	#line 240 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	241	108		replace deslocamento, deslocamento, __signed_stack_001calcula_deslocamento, __DF0calcula_deslocamento
+7	240	113	#line 240 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	242	113	#line 242 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+7	243	113		subret __calcula_deslocamento_return
+8	254	0	#line 254 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	255	0		acquire mutexDeslocamento
+8	254	1	#line 254 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	254	1	#line 254 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	255	1		mov __signed_stack_001alinharOrientacao, __alinharOrientacao_7qG2_targetOrientation_7qG2_000
+8	254	3	#line 254 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	254	3	#line 254 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	255	3		mov __D0alinharOrientacao, orientacao
+8	254	5	#line 254 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	255	5		sub __alinharOrientacao_7qG2_diff_7qG2_000, __signed_stack_001alinharOrientacao, __D0alinharOrientacao
+8	255	9	#line 255 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	257	9	#line 257 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	258	9		release mutexDeslocamento
+8	257	10	#line 257 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	257	10	#line 257 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	258	10		mov __signed_stack_001alinharOrientacao, __alinharOrientacao_7qG2_diff_7qG2_000
+8	257	12	#line 257 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	257	12	#line 257 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	258	12		set __D0alinharOrientacao, 0
+8	257	15	#line 257 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	258	15		cmp 1, __D0alinharOrientacao, __signed_stack_001alinharOrientacao, __D0alinharOrientacao
+8	258	19	#line 258 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	259	19		brtst 4, __ASM_Label_904, __D0alinharOrientacao
+8	258	22	#line 258 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	259	22		set __girar_eixo_v3_7qG2_turn_pct_7qG2_000, 100
+8	258	25	#line 258 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	258	25	#line 258 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	259	25		mov __D0alinharOrientacao, __alinharOrientacao_7qG2_diff_7qG2_000
+8	258	27	#line 258 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	259	27		abs __girar_eixo_v3_7qG2_graus_curva_7qG2_000, __D0alinharOrientacao
+8	258	30	#line 258 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	259	30	#line 259 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	260	30		subcall girar_eixo_v3, __girar_eixo_v3_return
+8	259	32	#line 259 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	259	32	#line 259 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	260	32		jmp __ASM_Label_911
+8	259	34	#line 259 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	260	34		mov __signed_stack_001alinharOrientacao, __alinharOrientacao_7qG2_diff_7qG2_000
+8	259	36	#line 259 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	259	36	#line 259 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	260	36		set __D0alinharOrientacao, 0
+8	259	39	#line 259 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	260	39		cmp 0, __D0alinharOrientacao, __signed_stack_001alinharOrientacao, __D0alinharOrientacao
+8	260	43	#line 260 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	261	43		brtst 4, __ASM_Label_914, __D0alinharOrientacao
+8	260	46	#line 260 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	261	46		mov __girar_eixo_v3_7qG2_turn_pct_7qG2_000, __constValNeg100
+8	260	48	#line 260 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	260	48	#line 260 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	261	48		mov __D0alinharOrientacao, __alinharOrientacao_7qG2_diff_7qG2_000
+8	260	50	#line 260 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	261	50		abs __girar_eixo_v3_7qG2_graus_curva_7qG2_000, __D0alinharOrientacao
+8	260	53	#line 260 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	261	53	#line 261 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	262	53		subcall girar_eixo_v3, __girar_eixo_v3_return
+8	261	55	#line 261 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	262	55	#line 262 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	262	55	#line 262 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	263	55	#line 263 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	264	55		acquire mutexDeslocamento
+8	263	56	#line 263 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	264	56	#line 264 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	265	56		mov orientacao, __alinharOrientacao_7qG2_targetOrientation_7qG2_000
+8	264	58	#line 264 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	264	58	#line 264 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	265	58	#line 265 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	266	58		release mutexDeslocamento
+8	265	59	#line 265 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	267	59	#line 267 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+8	268	59		subret __alinharOrientacao_return
+9	269	0	#line 269 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	270	0		acquire mutexDeslocamento
+9	269	1	#line 269 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	270	1	#line 270 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	271	1		subcall calcula_deslocamento, __calcula_deslocamento_return
+9	270	3	#line 270 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	272	3	#line 272 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	3		release mutexDeslocamento
+9	272	4	#line 272 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	272	4	#line 272 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	272	4	#line 272 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	272	4	#line 272 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	272	4	#line 272 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	4		mul __float_stack_001girar_eixo_v3, __girar_eixo_v3_7qG2_graus_curva_7qG2_000, __constValf16P8
+9	272	8	#line 272 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	8	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	8	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	8		div __girar_eixo_v3_7qG2_grau_giro_roda_7qG2_000, __float_stack_001girar_eixo_v3, __constValf5P6
+9	273	12	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	12	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	12		getout __signed_stack_001girar_eixo_v3, __constVal0, 14
+9	273	16	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	16	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	16		set __signed_stack_002girar_eixo_v3, 0
+9	273	19	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	19	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	19		mov __signed_stack_003girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	273	21	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	273	21	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	21		set __D0girar_eixo_v3, 100
+9	273	24	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	24		div __D0girar_eixo_v3, __signed_stack_003girar_eixo_v3, __D0girar_eixo_v3
+9	273	28	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	28		sub __signed_stack_002girar_eixo_v3, __signed_stack_002girar_eixo_v3, __D0girar_eixo_v3
+9	273	32	#line 273 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	32	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	32	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	275	32		mul __D0girar_eixo_v3, __signed_stack_002girar_eixo_v3, __girar_eixo_v3_7qG2_grau_giro_roda_7qG2_000
+9	274	36	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	275	36		add __girar_eixo_v3_7qG2_passo_esquerdo_7qG2_000, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	274	40	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	40	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	275	40		getout __signed_stack_001girar_eixo_v3, __constVal1, 14
+9	274	44	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	44	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	275	44		mov __signed_stack_002girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	274	46	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	274	46	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	275	46		set __D0girar_eixo_v3, 100
+9	274	49	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	275	49		div __signed_stack_002girar_eixo_v3, __signed_stack_002girar_eixo_v3, __D0girar_eixo_v3
+9	274	53	#line 274 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	277	53	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	277	53	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	53		mul __D0girar_eixo_v3, __signed_stack_002girar_eixo_v3, __girar_eixo_v3_7qG2_grau_giro_roda_7qG2_000
+9	277	57	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	57		add __girar_eixo_v3_7qG2_passo_direito_7qG2_000, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	277	61	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	277	61	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	61		set __signed_stack_001girar_eixo_v3, 30
+9	277	64	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	277	64	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	64		mov __signed_stack_002girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	277	66	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	277	66	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	66		set __signed_stack_003girar_eixo_v3, 90
+9	277	69	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	277	69	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	69		set __signed_stack_004girar_eixo_v3, 40
+9	277	72	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	277	72	#line 277 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	72		set __D0girar_eixo_v3, 70
+9	278	75	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	75	#pragma macro 7
+9	279	75		setout __OUT_AB, 2, __signed_stack_001girar_eixo_v3, 1, __constVal7, 8, __constVal2, 7, __signed_stack_002girar_eixo_v3, 6, __constVal32, 5, __constVal0, 10, __signed_stack_003girar_eixo_v3, 11, __signed_stack_004girar_eixo_v3, 12, __D0girar_eixo_v3, 0, __constVal63
+9	10674	98	#line 10674 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	98	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	98	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	98		getout __signed_stack_001girar_eixo_v3, __constVal1, 14
+9	278	102	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	102	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	102		mov __D0girar_eixo_v3, __girar_eixo_v3_7qG2_passo_direito_7qG2_000
+9	278	104	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	104		cmp 5, __D0girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	278	108	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	108		brtst 4, __ASM_Label_948, __D0girar_eixo_v3
+9	278	111	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	111		getout __signed_stack_001girar_eixo_v3, __constVal0, 14
+9	278	115	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	278	115	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	115		mov __D0girar_eixo_v3, __girar_eixo_v3_7qG2_passo_esquerdo_7qG2_000
+9	278	117	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	117		cmp 5, __D0girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	278	121	#line 278 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	279	121		brtst 4, __ASM_Label_946, __D0girar_eixo_v3
+9	279	124	#line 279 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	280	124		jmp __ASM_Label_945
+9	279	126	#line 279 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	281	126	#line 281 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	282	126	#pragma macro 7
+9	282	126		setout __OUT_AB, 2, __constVal0, 1, __constVal3, 8, __constVal0, 6, __constVal32, 7, __constVal0, 5, __constVal0, 10, __constVal96, 11, __constVal32, 12, __constVal32, 0, __constVal63
+9	10716	149	#line 10716 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	281	149	#line 281 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	281	149	#line 281 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	282	149		mov __signed_stack_001girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	281	151	#line 281 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	281	151	#line 281 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	282	151		mov __D0girar_eixo_v3, __constValNeg100
+9	281	153	#line 281 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	282	153		cmp 4, __D0girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	283	157	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	157		brtst 4, __ASM_Label_955, __D0girar_eixo_v3
+9	283	160	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	160		mov __signed_stack_001girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	283	162	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	283	162	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	162		set __D0girar_eixo_v3, 100
+9	283	165	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	165		div __signed_stack_001girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	283	169	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	283	169	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	169		set __D0girar_eixo_v3, 30
+9	283	172	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	172		mul __signed_stack_001girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	283	176	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	283	176	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	176		set __signed_stack_002girar_eixo_v3, 0
+9	283	179	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	283	179	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	179		set __signed_stack_003girar_eixo_v3, 90
+9	283	182	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	283	182	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	182		set __signed_stack_004girar_eixo_v3, 40
+9	283	185	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	283	185	#line 283 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	185		set __D0girar_eixo_v3, 70
+9	284	188	#line 284 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	285	188	#pragma macro 7
+9	285	188		setout __constVal1, 2, __signed_stack_001girar_eixo_v3, 1, __constVal7, 8, __constVal2, 7, __signed_stack_002girar_eixo_v3, 6, __constVal32, 5, __constVal0, 10, __signed_stack_003girar_eixo_v3, 11, __signed_stack_004girar_eixo_v3, 12, __D0girar_eixo_v3, 0, __constVal63
+9	10775	211	#line 10775 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	211	#line 284 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	211	#line 284 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	285	211		getout __signed_stack_001girar_eixo_v3, __constVal1, 14
+9	284	215	#line 284 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	284	215	#line 284 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	285	215		mov __D0girar_eixo_v3, __girar_eixo_v3_7qG2_passo_direito_7qG2_000
+9	284	217	#line 284 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	285	217		cmp 5, __D0girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	284	221	#line 284 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	285	221		brtst 4, __ASM_Label_969, __D0girar_eixo_v3
+9	285	224	#line 285 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	286	224		jmp __ASM_Label_968
+9	285	226	#line 285 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	226	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	226	#pragma macro 7
+9	288	226		setout __constVal1, 2, __constVal0, 1, __constVal3, 8, __constVal0, 6, __constVal32, 7, __constVal0, 5, __constVal0, 10, __constVal96, 11, __constVal32, 12, __constVal32, 0, __constVal63
+9	10801	249	#line 10801 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	249	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	249	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	249		set __signed_stack_001girar_eixo_v3, 0
+9	287	252	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	252	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	252		mov __signed_stack_002girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	287	254	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	254	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	254		set __D0girar_eixo_v3, 100
+9	287	257	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	257		div __signed_stack_002girar_eixo_v3, __signed_stack_002girar_eixo_v3, __D0girar_eixo_v3
+9	287	261	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	261	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	261		set __D0girar_eixo_v3, 30
+9	287	264	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	264		mul __D0girar_eixo_v3, __signed_stack_002girar_eixo_v3, __D0girar_eixo_v3
+9	287	268	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	268		sub __signed_stack_001girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	287	272	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	272	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	272		set __signed_stack_002girar_eixo_v3, 0
+9	287	275	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	275	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	275		set __signed_stack_003girar_eixo_v3, 90
+9	287	278	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	278	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	278		set __signed_stack_004girar_eixo_v3, 40
+9	287	281	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	287	281	#line 287 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	281		set __D0girar_eixo_v3, 70
+9	288	284	#line 288 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	289	284	#pragma macro 7
+9	289	284		setout __constVal0, 2, __signed_stack_001girar_eixo_v3, 1, __constVal7, 8, __constVal2, 7, __signed_stack_002girar_eixo_v3, 6, __constVal32, 5, __constVal0, 10, __signed_stack_003girar_eixo_v3, 11, __signed_stack_004girar_eixo_v3, 12, __D0girar_eixo_v3, 0, __constVal63
+9	10854	307	#line 10854 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	307	#line 288 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	307	#line 288 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	289	307		getout __signed_stack_001girar_eixo_v3, __constVal0, 14
+9	288	311	#line 288 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	288	311	#line 288 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	289	311		mov __D0girar_eixo_v3, __girar_eixo_v3_7qG2_passo_esquerdo_7qG2_000
+9	288	313	#line 288 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	289	313		cmp 5, __D0girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	288	317	#line 288 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	289	317		brtst 4, __ASM_Label_985, __D0girar_eixo_v3
+9	289	320	#line 289 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	290	320		jmp __ASM_Label_984
+9	289	322	#line 289 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	290	322	#line 290 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	291	322	#pragma macro 7
+9	291	322		setout __constVal0, 2, __constVal0, 1, __constVal3, 8, __constVal0, 6, __constVal32, 7, __constVal0, 5, __constVal0, 10, __constVal96, 11, __constVal32, 12, __constVal32, 0, __constVal63
+9	10880	345	#line 10880 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	290	345	#line 290 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	294	345	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	345		jmp __ASM_Label_988
+9	294	347	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	347		mov __signed_stack_001girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	294	349	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	294	349	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	349		set __D0girar_eixo_v3, 100
+9	294	352	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	352		div __signed_stack_001girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	294	356	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	294	356	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	356		set __D0girar_eixo_v3, 30
+9	294	359	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	359		mul __signed_stack_001girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	294	363	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	294	363	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	363		set __signed_stack_002girar_eixo_v3, 0
+9	294	366	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	294	366	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	366		set __signed_stack_003girar_eixo_v3, 90
+9	294	369	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	294	369	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	369		set __signed_stack_004girar_eixo_v3, 40
+9	294	372	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	294	372	#line 294 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	372		set __D0girar_eixo_v3, 70
+9	295	375	#line 295 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	296	375	#pragma macro 7
+9	296	375		setout __constVal1, 2, __signed_stack_001girar_eixo_v3, 1, __constVal7, 8, __constVal2, 7, __signed_stack_002girar_eixo_v3, 6, __constVal32, 5, __constVal0, 10, __signed_stack_003girar_eixo_v3, 11, __signed_stack_004girar_eixo_v3, 12, __D0girar_eixo_v3, 0, __constVal63
+9	10928	398	#line 10928 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	398	#line 295 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	398	#line 295 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	296	398		getout __signed_stack_001girar_eixo_v3, __constVal1, 14
+9	295	402	#line 295 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	295	402	#line 295 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	296	402		mov __D0girar_eixo_v3, __girar_eixo_v3_7qG2_passo_direito_7qG2_000
+9	295	404	#line 295 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	296	404		cmp 5, __D0girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	295	408	#line 295 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	296	408		brtst 4, __ASM_Label_1002, __D0girar_eixo_v3
+9	296	411	#line 296 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	297	411		jmp __ASM_Label_1001
+9	296	413	#line 296 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	413	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	413	#pragma macro 7
+9	299	413		setout __constVal1, 2, __constVal0, 1, __constVal3, 8, __constVal0, 6, __constVal32, 7, __constVal0, 5, __constVal0, 10, __constVal96, 11, __constVal32, 12, __constVal32, 0, __constVal63
+9	10954	436	#line 10954 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	436	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	436	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	436		set __signed_stack_001girar_eixo_v3, 0
+9	298	439	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	439	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	439		mov __signed_stack_002girar_eixo_v3, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	298	441	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	441	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	441		set __D0girar_eixo_v3, 100
+9	298	444	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	444		div __signed_stack_002girar_eixo_v3, __signed_stack_002girar_eixo_v3, __D0girar_eixo_v3
+9	298	448	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	448	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	448		set __D0girar_eixo_v3, 30
+9	298	451	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	451		mul __D0girar_eixo_v3, __signed_stack_002girar_eixo_v3, __D0girar_eixo_v3
+9	298	455	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	455		sub __signed_stack_001girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	298	459	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	459	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	459		set __signed_stack_002girar_eixo_v3, 0
+9	298	462	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	462	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	462		set __signed_stack_003girar_eixo_v3, 90
+9	298	465	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	465	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	465		set __signed_stack_004girar_eixo_v3, 40
+9	298	468	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	298	468	#line 298 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	468		set __D0girar_eixo_v3, 70
+9	299	471	#line 299 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	300	471	#pragma macro 7
+9	300	471		setout __constVal0, 2, __signed_stack_001girar_eixo_v3, 1, __constVal7, 8, __constVal2, 7, __signed_stack_002girar_eixo_v3, 6, __constVal32, 5, __constVal0, 10, __signed_stack_003girar_eixo_v3, 11, __signed_stack_004girar_eixo_v3, 12, __D0girar_eixo_v3, 0, __constVal63
+9	11007	494	#line 11007 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	494	#line 299 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	494	#line 299 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	300	494		getout __signed_stack_001girar_eixo_v3, __constVal0, 14
+9	299	498	#line 299 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	299	498	#line 299 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	300	498		mov __D0girar_eixo_v3, __girar_eixo_v3_7qG2_passo_esquerdo_7qG2_000
+9	299	500	#line 299 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	300	500		cmp 5, __D0girar_eixo_v3, __signed_stack_001girar_eixo_v3, __D0girar_eixo_v3
+9	299	504	#line 299 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	300	504		brtst 4, __ASM_Label_1018, __D0girar_eixo_v3
+9	300	507	#line 300 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	301	507		jmp __ASM_Label_1017
+9	300	509	#line 300 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	301	509	#line 301 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	302	509	#pragma macro 7
+9	302	509		setout __constVal0, 2, __constVal0, 1, __constVal3, 8, __constVal0, 6, __constVal32, 7, __constVal0, 5, __constVal0, 10, __constVal96, 11, __constVal32, 12, __constVal32, 0, __constVal63
+9	11033	532	#line 11033 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	301	532	#line 301 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	302	532	#line 302 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	302	532	#line 302 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	303	532		mov __muda_bussola_7qG2_turn_pct_7qG2_000, __girar_eixo_v3_7qG2_turn_pct_7qG2_000
+9	302	534	#line 302 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	303	534	#line 303 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	304	534		subcall muda_bussola, __muda_bussola_return
+9	303	536	#line 303 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	304	536	#line 304 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	305	536	#pragma macro 7
+9	305	536		setout __OUT_AB, 2, __constVal0, 1, __constVal3, 8, __constVal0, 6, __constVal32, 7, __constVal0, 5, __constVal0, 10, __constVal96, 11, __constVal32, 12, __constVal32, 0, __constVal63
+9	11047	559	#line 11047 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	304	559	#line 304 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	304	559	#line 304 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	305	559		set __Wait_7qG2_ms_7qG2_000_inline_girar_eixo_v3, 200
+9	304	562	#line 304 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	8551	562	#line 8551 "NXCDefs.h"
+9	8552	562		waitv __Wait_7qG2_ms_7qG2_000_inline_girar_eixo_v3
+9	8551	564	#line 8551 "NXCDefs.h"
+9	305	564	#line 305 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	308	564	#line 308 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+9	309	564		subret __girar_eixo_v3_return
+10	309	0	#line 309 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	310	0		mov __float_stack_001segue_frente_cm, __segue_frente_cm_7qG2_cm_7qG2_000
+10	309	2	#line 309 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	309	2	#line 309 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	310	2		mov __DF0segue_frente_cm, __constVal360
+10	309	4	#line 309 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	310	4		mul __float_stack_001segue_frente_cm, __float_stack_001segue_frente_cm, __DF0segue_frente_cm
+10	309	8	#line 309 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	309	8	#line 309 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	310	8	#line 310 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	311	8		div __segue_frente_cm_7qG2_passo_7qG2_000, __float_stack_001segue_frente_cm, __constValf17P5929208
+10	310	12	#line 310 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	310	12	#line 310 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	311	12		getout __signed_stack_001segue_frente_cm, __constVal1, 14
+10	310	16	#line 310 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	312	16	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	312	16	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	16		add __segue_frente_cm_7qG2_grau_7qG2_000, __signed_stack_001segue_frente_cm, __segue_frente_cm_7qG2_passo_7qG2_000
+10	312	20	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	312	20	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	20		set __signed_stack_001segue_frente_cm, 30
+10	312	23	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	312	23	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	23		set __signed_stack_002segue_frente_cm, 0
+10	312	26	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	312	26	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	26		set __signed_stack_003segue_frente_cm, 90
+10	312	29	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	312	29	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	29		set __signed_stack_004segue_frente_cm, 40
+10	312	32	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	312	32	#line 312 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	32		set __D0segue_frente_cm, 70
+10	313	35	#line 313 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	314	35	#pragma macro 7
+10	314	35		setout __OUT_AB, 2, __signed_stack_001segue_frente_cm, 1, __constVal7, 8, __constVal2, 7, __signed_stack_002segue_frente_cm, 6, __constVal32, 5, __constVal0, 10, __signed_stack_003segue_frente_cm, 11, __signed_stack_004segue_frente_cm, 12, __D0segue_frente_cm, 0, __constVal63
+10	11135	58	#line 11135 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	58	#line 313 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	58	#line 313 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	314	58		getout __signed_stack_001segue_frente_cm, __constVal1, 14
+10	313	62	#line 313 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	313	62	#line 313 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	314	62		mov __D0segue_frente_cm, __segue_frente_cm_7qG2_grau_7qG2_000
+10	313	64	#line 313 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	314	64		cmp 0, __D0segue_frente_cm, __signed_stack_001segue_frente_cm, __D0segue_frente_cm
+10	315	68	#line 315 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	316	68		brtst 4, __ASM_Label_1044, __D0segue_frente_cm
+10	315	71	#line 315 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	315	71	#line 315 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	316	71		jmp __ASM_Label_1043
+10	315	73	#line 315 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	316	73	#line 316 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	317	73	#pragma macro 7
+10	317	73		setout __OUT_AB, 2, __constVal0, 1, __constVal3, 8, __constVal0, 6, __constVal32, 7, __constVal0, 5, __constVal0, 10, __constVal96, 11, __constVal32, 12, __constVal32, 0, __constVal63
+10	11162	96	#line 11162 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	316	96	#line 316 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	316	96	#line 316 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	317	96		set __Wait_7qG2_ms_7qG2_000_inline_segue_frente_cm, 200
+10	316	99	#line 316 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	8551	99	#line 8551 "NXCDefs.h"
+10	8552	99		waitv __Wait_7qG2_ms_7qG2_000_inline_segue_frente_cm
+10	8551	101	#line 8551 "NXCDefs.h"
+10	317	101	#line 317 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	320	101	#line 320 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+10	321	101		subret __segue_frente_cm_return
+11	322	0	#line 322 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	323	0		set __executa_trajetoria_7qG2_currentX_7qG2_000, 0
+11	322	3	#line 322 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	323	3	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	3		set __executa_trajetoria_7qG2_currentY_7qG2_000, 0
+11	323	6	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	323	6	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	6		set __executa_trajetoria_7qG2_i_7qG2_001, 0
+11	323	9	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	323	9	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	9		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_i_7qG2_001
+11	323	11	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	323	11	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	11		set __D0executa_trajetoria, 4
+11	323	14	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	14		cmp 0, __D0executa_trajetoria, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	323	18	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	18		brtst 4, __ASM_Label_1054, __D0executa_trajetoria
+11	323	21	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	21		jmp __ASM_Label_1055
+11	323	23	#line 323 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	324	23		add __executa_trajetoria_7qG2_i_7qG2_001, __executa_trajetoria_7qG2_i_7qG2_001, __constVal1
+11	324	27	#line 324 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	325	27		jmp __ASM_Label_1053
+11	325	29	#line 325 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	326	29		acquire mutexDeslocamento
+11	325	30	#line 325 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	325	30	#line 325 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	326	30		set __signed_stack_001executa_trajetoria, 0
+11	325	33	#line 325 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	325	33	#line 325 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	326	33		index __executa_trajetoria_7qG2_currentX_7qG2_000, deslocamento, __signed_stack_001executa_trajetoria
+11	325	37	#line 325 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	326	37	#line 326 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	326	37	#line 326 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	326	37	#line 326 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	327	37		set __signed_stack_001executa_trajetoria, 1
+11	326	40	#line 326 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	326	40	#line 326 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	327	40		index __executa_trajetoria_7qG2_currentY_7qG2_000, deslocamento, __signed_stack_001executa_trajetoria
+11	326	44	#line 326 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	327	44	#line 327 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	327	44	#line 327 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	329	44	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	44		release mutexDeslocamento
+11	329	45	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	329	45	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	45		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_i_7qG2_001
+11	329	47	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	329	47	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	47		index __ArrHelper__executa_trajetoria_236_0, coordinates, __signed_stack_001executa_trajetoria
+11	329	51	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	51		set __signed_stack_002executa_trajetoria, 0
+11	329	54	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	329	54	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	54		index __executa_trajetoria_7qG2_targetX_7qG2_002, __ArrHelper__executa_trajetoria_236_0, __signed_stack_002executa_trajetoria
+11	329	58	#line 329 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	58	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	58	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	331	58		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_i_7qG2_001
+11	330	60	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	60	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	331	60		index __ArrHelper__executa_trajetoria_236_0, coordinates, __signed_stack_001executa_trajetoria
+11	330	64	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	331	64		set __signed_stack_002executa_trajetoria, 1
+11	330	67	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	330	67	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	331	67		index __executa_trajetoria_7qG2_targetY_7qG2_002, __ArrHelper__executa_trajetoria_236_0, __signed_stack_002executa_trajetoria
+11	330	71	#line 330 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	335	71	#line 335 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	335	71	#line 335 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	336	71		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_currentX_7qG2_000
+11	335	73	#line 335 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	335	73	#line 335 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	336	73		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_targetX_7qG2_002
+11	335	75	#line 335 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	336	75		cmp 0, __D0executa_trajetoria, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	336	79	#line 336 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	337	79		brtst 4, __ASM_Label_1083, __D0executa_trajetoria
+11	336	82	#line 336 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	337	82		set __alinharOrientacao_7qG2_targetOrientation_7qG2_000, 0
+11	336	85	#line 336 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	337	85	#line 337 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	338	85		subcall alinharOrientacao, __alinharOrientacao_return
+11	337	87	#line 337 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	337	87	#line 337 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	338	87		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_targetX_7qG2_002
+11	337	89	#line 337 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	337	89	#line 337 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	338	89		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_currentX_7qG2_000
+11	337	91	#line 337 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	338	91		sub __segue_frente_cm_7qG2_cm_7qG2_000, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	337	95	#line 337 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	338	95	#line 338 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	339	95		subcall segue_frente_cm, __segue_frente_cm_return
+11	338	97	#line 338 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	338	97	#line 338 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	339	97		jmp __ASM_Label_1088
+11	338	99	#line 338 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	339	99		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_currentX_7qG2_000
+11	338	101	#line 338 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	338	101	#line 338 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	339	101		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_targetX_7qG2_002
+11	338	103	#line 338 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	339	103		cmp 1, __D0executa_trajetoria, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	339	107	#line 339 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	340	107		brtst 4, __ASM_Label_1091, __D0executa_trajetoria
+11	339	110	#line 339 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	340	110		set __alinharOrientacao_7qG2_targetOrientation_7qG2_000, 180
+11	339	113	#line 339 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	340	113	#line 340 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	341	113		subcall alinharOrientacao, __alinharOrientacao_return
+11	340	115	#line 340 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	340	115	#line 340 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	341	115		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_currentX_7qG2_000
+11	340	117	#line 340 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	340	117	#line 340 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	341	117		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_targetX_7qG2_002
+11	340	119	#line 340 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	341	119		sub __segue_frente_cm_7qG2_cm_7qG2_000, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	340	123	#line 340 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	341	123	#line 341 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	342	123		subcall segue_frente_cm, __segue_frente_cm_return
+11	341	125	#line 341 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	347	125	#line 347 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	347	125	#line 347 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	347	125	#line 347 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	348	125		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_currentY_7qG2_000
+11	347	127	#line 347 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	347	127	#line 347 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	348	127		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_targetY_7qG2_002
+11	347	129	#line 347 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	348	129		cmp 0, __D0executa_trajetoria, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	348	133	#line 348 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	349	133		brtst 4, __ASM_Label_1098, __D0executa_trajetoria
+11	348	136	#line 348 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	349	136		set __alinharOrientacao_7qG2_targetOrientation_7qG2_000, 90
+11	348	139	#line 348 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	349	139	#line 349 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	350	139		subcall alinharOrientacao, __alinharOrientacao_return
+11	349	141	#line 349 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	349	141	#line 349 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	350	141		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_targetY_7qG2_002
+11	349	143	#line 349 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	349	143	#line 349 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	350	143		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_currentY_7qG2_000
+11	349	145	#line 349 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	350	145		sub __segue_frente_cm_7qG2_cm_7qG2_000, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	349	149	#line 349 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	350	149	#line 350 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	351	149		subcall segue_frente_cm, __segue_frente_cm_return
+11	350	151	#line 350 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	350	151	#line 350 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	351	151		jmp __ASM_Label_1103
+11	350	153	#line 350 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	351	153		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_currentY_7qG2_000
+11	350	155	#line 350 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	350	155	#line 350 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	351	155		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_targetY_7qG2_002
+11	350	157	#line 350 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	351	157		cmp 1, __D0executa_trajetoria, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	351	161	#line 351 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	352	161		brtst 4, __ASM_Label_1106, __D0executa_trajetoria
+11	351	164	#line 351 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	352	164		set __alinharOrientacao_7qG2_targetOrientation_7qG2_000, 270
+11	351	167	#line 351 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	352	167	#line 352 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	353	167		subcall alinharOrientacao, __alinharOrientacao_return
+11	352	169	#line 352 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	352	169	#line 352 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	353	169		mov __signed_stack_001executa_trajetoria, __executa_trajetoria_7qG2_currentY_7qG2_000
+11	352	171	#line 352 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	352	171	#line 352 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	353	171		mov __D0executa_trajetoria, __executa_trajetoria_7qG2_targetY_7qG2_002
+11	352	173	#line 352 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	353	173		sub __segue_frente_cm_7qG2_cm_7qG2_000, __signed_stack_001executa_trajetoria, __D0executa_trajetoria
+11	352	177	#line 352 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	353	177	#line 353 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	354	177		subcall segue_frente_cm, __segue_frente_cm_return
+11	353	179	#line 353 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	360	179	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	360	179	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	360	179	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	361	179		set __signed_stack_001executa_trajetoria, 1000
+11	360	182	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	360	182	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	361	182		set __signed_stack_002executa_trajetoria, 500
+11	360	185	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	360	185	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	361	185		set __signed_stack_003executa_trajetoria, 4
+11	360	188	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	360	188	#line 360 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	361	188		set __D0executa_trajetoria, 0
+11	361	191	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	191		acquire __SPTArgsMutex
+11	361	192	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	192		mov __SPTArgs.Frequency, __signed_stack_001executa_trajetoria
+11	361	195	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	195		mov __SPTArgs.Duration, __signed_stack_002executa_trajetoria
+11	361	197	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	197		mov __SPTArgs.Volume, __signed_stack_003executa_trajetoria
+11	361	199	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	199		mov __SPTArgs.Loop, __D0executa_trajetoria
+11	361	201	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	201		syscall 10, __SPTArgs
+11	361	204	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	204		mov __D0executa_trajetoria, __SPTArgs.Result
+11	361	206	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	206		release __SPTArgsMutex
+11	361	207	#line 361 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	207	#line 362 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	207		acquire mutexDeslocamento
+11	362	208	#line 362 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	208	#line 362 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	208		set __signed_stack_001executa_trajetoria, 0
+11	362	211	#line 362 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	211	#line 362 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	211		set __signed_stack_002executa_trajetoria, 56
+11	362	214	#line 362 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	362	214	#line 362 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	214		strcat __strbufexecuta_trajetoria, __constStr0015
+11	363	218	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	218		acquire __TextOutMutex
+11	363	219	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	219		mov __TextOutArgs.Location.X, __signed_stack_001executa_trajetoria
+11	363	222	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	222		mov __TextOutArgs.Location.Y, __signed_stack_002executa_trajetoria
+11	363	225	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	225		set __TextOutArgs.Options, 0
+11	363	228	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	228		mov __TextOutArgs.Text, __strbufexecuta_trajetoria
+11	363	230	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	230		syscall 13, __TextOutArgs
+11	363	233	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	233		mov __D0executa_trajetoria, __TextOutArgs.Result
+11	363	235	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	235		release __TextOutMutex
+11	363	236	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	236	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	236		set __signed_stack_001executa_trajetoria, 0
+11	363	239	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	239	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	239		set __signed_stack_002executa_trajetoria, 48
+11	363	242	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	242	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	242		set __signed_stack_003executa_trajetoria, 0
+11	363	245	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	363	245	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	245		index __DF0executa_trajetoria, deslocamento, __signed_stack_003executa_trajetoria
+11	363	249	#line 363 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	249	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	249		acquire __TextOutMutex
+11	364	250	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	250		mov __TextOutArgs.Location.X, __signed_stack_001executa_trajetoria
+11	364	253	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	253		mov __TextOutArgs.Location.Y, __signed_stack_002executa_trajetoria
+11	364	256	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	256		set __TextOutArgs.Options, 0
+11	364	259	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	259		numtostr __TextOutArgs.Text, __DF0executa_trajetoria
+11	364	262	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	262		syscall 13, __TextOutArgs
+11	364	265	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	265		mov __D0executa_trajetoria, __TextOutArgs.Result
+11	364	267	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	267		release __TextOutMutex
+11	364	268	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	268	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	268		set __signed_stack_001executa_trajetoria, 0
+11	364	271	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	271	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	271		set __signed_stack_002executa_trajetoria, 40
+11	364	274	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	364	274	#line 364 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	274		strcat __strbufexecuta_trajetoria, __constStr0016
+11	365	278	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	278		acquire __TextOutMutex
+11	365	279	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	279		mov __TextOutArgs.Location.X, __signed_stack_001executa_trajetoria
+11	365	282	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	282		mov __TextOutArgs.Location.Y, __signed_stack_002executa_trajetoria
+11	365	285	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	285		set __TextOutArgs.Options, 0
+11	365	288	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	288		mov __TextOutArgs.Text, __strbufexecuta_trajetoria
+11	365	290	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	290		syscall 13, __TextOutArgs
+11	365	293	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	293		mov __D0executa_trajetoria, __TextOutArgs.Result
+11	365	295	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	295		release __TextOutMutex
+11	365	296	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	296	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	296		set __signed_stack_001executa_trajetoria, 0
+11	365	299	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	299	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	299		set __signed_stack_002executa_trajetoria, 32
+11	365	302	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	302	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	302		set __signed_stack_003executa_trajetoria, 1
+11	365	305	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	365	305	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	305		index __DF0executa_trajetoria, deslocamento, __signed_stack_003executa_trajetoria
+11	365	309	#line 365 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	366	309	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	309		acquire __TextOutMutex
+11	366	310	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	310		mov __TextOutArgs.Location.X, __signed_stack_001executa_trajetoria
+11	366	313	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	313		mov __TextOutArgs.Location.Y, __signed_stack_002executa_trajetoria
+11	366	316	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	316		set __TextOutArgs.Options, 0
+11	366	319	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	319		numtostr __TextOutArgs.Text, __DF0executa_trajetoria
+11	366	322	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	322		syscall 13, __TextOutArgs
+11	366	325	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	325		mov __D0executa_trajetoria, __TextOutArgs.Result
+11	366	327	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	327		release __TextOutMutex
+11	366	328	#line 366 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	328	#line 367 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	368	328		release mutexDeslocamento
+11	367	329	#line 367 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	367	329	#line 367 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	368	329		set __Wait_7qG2_ms_7qG2_000_inline_executa_trajetoria, 2000
+11	367	332	#line 367 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	8551	332	#line 8551 "NXCDefs.h"
+11	8552	332		waitv __Wait_7qG2_ms_7qG2_000_inline_executa_trajetoria
+11	8551	334	#line 8551 "NXCDefs.h"
+11	369	334	#line 369 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	6678	334	#line 6678 "NXCDefs.h"
+11	6679	334	#pragma macro 6
+11	6679	334		acquire __PointOutMutex
+11	6679	335		mov __PointOutArgs.Location.X, __constVal200
+11	6679	337		mov __PointOutArgs.Location.Y, __constVal200
+11	6679	339		mov __PointOutArgs.Options, __constVal1
+11	6679	341		syscall 14, __PointOutArgs
+11	6679	344		release __PointOutMutex
+11	11702	345	#line 11702 "NXCDefs.h"
+11	6678	345	#line 6678 "NXCDefs.h"
+11	370	345	#line 370 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	370	345	#line 370 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	371	345		set __Wait_7qG2_ms_7qG2_000_inline_executa_trajetoria, 1000
+11	370	348	#line 370 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	8551	348	#line 8551 "NXCDefs.h"
+11	8552	348		waitv __Wait_7qG2_ms_7qG2_000_inline_executa_trajetoria
+11	8551	350	#line 8551 "NXCDefs.h"
+11	371	350	#line 371 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	374	350	#line 374 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	375	350		jmp __ASM_Label_1056
+11	374	352	#line 374 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	374	352	#line 374 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+11	375	352		subret __executa_trajetoria_return
+12	399	0	#line 399 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+12	400	0		arrinit deslocamento, __constVal0, __constVal2
+12	399	4	#line 399 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+12	399	4	#line 399 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+12	400	4		arrinit __coordinates_2, __constVal0, __constVal2
+12	399	8	#line 399 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+12	400	8		arrinit coordinates, __coordinates_2, __constVal10
+12	399	12	#line 399 "C:\Users\washi\AppData\Local\Temp\temp.nxc"
+12	400	12		subret ____initialize_global_data_return
+#CLUMPS
+Clump	Name	Offset	File
+0	main	0	C:\Users\washi\AppData\Local\Temp\temp.nxc
+1	__ResetSensorSubroutine	75	NXTDefs.h
+2	odometria	88	C:\Users\washi\AppData\Local\Temp\temp.nxc
+3	seno	121	C:\Users\washi\AppData\Local\Temp\temp.nxc
+4	cosseno	202	C:\Users\washi\AppData\Local\Temp\temp.nxc
+5	configureSensors	283	C:\Users\washi\AppData\Local\Temp\temp.nxc
+6	muda_bussola	386	C:\Users\washi\AppData\Local\Temp\temp.nxc
+7	calcula_deslocamento	462	C:\Users\washi\AppData\Local\Temp\temp.nxc
+8	alinharOrientacao	577	C:\Users\washi\AppData\Local\Temp\temp.nxc
+9	girar_eixo_v3	638	C:\Users\washi\AppData\Local\Temp\temp.nxc
+10	segue_frente_cm	1204	C:\Users\washi\AppData\Local\Temp\temp.nxc
+11	executa_trajetoria	1307	C:\Users\washi\AppData\Local\Temp\temp.nxc
+12	__initialize_global_data	1661	C:\Users\washi\AppData\Local\Temp\temp.nxc
