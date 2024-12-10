@@ -229,7 +229,7 @@ void calcula_deslocamento(){
      long RD_Atual = MotorRotationCount(MOTOR_D);
      // Com esta conta eu tenho o deslocamento nulo ao girar no proprio eixo
      long desloc_grau = ((RE_Atual -gr_ant_RE) + (RD_Atual -gr_ant_RD))/2;
-     float desloc_cm = -((2*PI*(DIAMETRO_RODA/2)*desloc_grau)/360);
+     float desloc_cm = ((2*PI*(DIAMETRO_RODA/2)*desloc_grau)/360);
      // Atualizo o grau anterior do robo
      gr_ant_RE = RE_Atual;
      gr_ant_RD = RD_Atual;
