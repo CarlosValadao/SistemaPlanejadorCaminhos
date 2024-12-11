@@ -1,6 +1,5 @@
 from nxt.locator import find
 from nxt.brick import Brick
-from nxt.error import DirectProtocolError
 from constants import MAILBOX1, MAILBOX3, MAILBOX10, NXT_BLUETOOTH_MAC_ADDRESS
 import RPP
 from threading import Thread, Lock
@@ -10,13 +9,13 @@ from time import sleep
 from os import name, system
 from Assets import datetime_formated
 
-import math
-
 # By default use MAILBOX1 to send messages
 # and MAILBOX10 to receive reponse messages
 #     MAILBOX3  to receive data messages
 
-# Manages the communication between the supervisor and the robot over Bluetooth
+'''
+Manage the communication between the supervisor and the robot over Bluetooth
+'''
 class SupervisorClient:
     def __init__(self, nxt_bluetooth_mac):
         self._is_nxt_connected: bool = False
@@ -30,7 +29,7 @@ class SupervisorClient:
     
     # --- Connection Management ---
     
-    def connect_to_nxt(self, nxt_bluetooth_mac: str) -> Brick|None:
+    def connect_to_nxt(self, nxt_bluetooth_mac: str) -> Brick|bool:
         try:
             nxt_brick = find(host=nxt_bluetooth_mac)
             self._is_nxt_connected = True
@@ -41,7 +40,7 @@ class SupervisorClient:
             self.show_warning_message("NXT is unreachable")
             self.show_warning_message("Trying to connect agin...")
             self._is_nxt_connected = False
-            return None
+            return False
     
     """force the connection with the NXT, ad infinitum every 500ms
     
@@ -51,9 +50,13 @@ class SupervisorClient:
     :rtype: nxt.Brick.Brick
     """
     def force_nxt_connection(self, nxt_bluetooth_mac: str) -> Brick:
-        while not self._is_nxt_connected:
+        attemps = 0
+        while not self._is_nxt_connected and attemps < 5:
             nxt_brick = self.connect_to_nxt(nxt_bluetooth_mac)
-            sleep(0.5)
+            sleep(0.3)
+            attemps += 1
+        if not self._is_nxt_connected:
+            raise BrickNotFoundError
         return nxt_brick
 
     def establish_nxt_connection(self, host: str) -> Brick:
@@ -91,16 +94,6 @@ class SupervisorClient:
                 data = RPP.parse_message(received_message)
                 if is_data_msg:
                     with self._msg_data_lock:
-                        #vetor_desc_tmp = [0,0] # Vetor deslocamento x,y
-                        #desloc = data[0] # O quanto o robô se deslocou
-                        #angulo = data[1] # A orientação do deslocamento do robô
-                        #orientacao_rad = math.radians(angulo) # Conversão do angulo para radianos
-                        #regiao = data[2]
-                        # Para o deslocamento em X
-                        #vetor_desc_tmp[0] = self._recv_data_msg[len(self._recv_data_msg)-1][0] + desloc*math.cos(orientacao_rad) 
-                        # Para o deslocamento em Y
-                        #vetor_desc_tmp[1] = self._recv_data_msg[len(self._recv_data_msg)-1][1] + desloc*math.sin(orientacao_rad)
-                        #self._recv_data_msg.append((vetor_desc_tmp[0], vetor_desc_tmp[1], regiao))
                         self._recv_data_msg.append(data)
                 else:
                     with self._msg_data_lock:
@@ -115,13 +108,13 @@ class SupervisorClient:
     def get_data_msgs(self) -> list[tuple[int]]:
         with self._msg_data_lock:
             temp = self._recv_data_msg.copy()
-            self._recv_data_msg = []
+            self._recv_data_msg.clear()
         return temp
     
     def get_response_msgs(self) -> list[int]:
         with self._msg_data_lock:
             temp = self._recv_response_msg.copy()
-            self._recv_response_msg = []
+            self._recv_response_msg.clear()
         return temp
     
     # --- Utilities ---
