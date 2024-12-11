@@ -35,7 +35,7 @@ def calcular_orientacao(posicao_atual, proxima_posicao):
     return (angulo + 360) % 360  # Ajusta para o intervalo [0, 360]
 
 def planejar_trajetoria(campo, inicio, objetivo, max_passos=1000):
-    trajeto = [(inicio[0], inicio[1], 0)]  # Adiciona orientação inicial (0° por padrão)
+    trajeto = [(inicio[0], inicio[1])]
     posicao = inicio
 
     for _ in range(max_passos):
@@ -63,8 +63,8 @@ def planejar_trajetoria(campo, inicio, objetivo, max_passos=1000):
         
         # Calcula a próxima posição com base no campo potencial
         proxima_posicao = min(vizinhos, key=lambda p: campo[p])
-        orientacao = calcular_orientacao(posicao, proxima_posicao)
-        trajeto.append((proxima_posicao[0], proxima_posicao[1], orientacao))
+        #orientacao = calcular_orientacao(posicao, proxima_posicao)
+        trajeto.append((proxima_posicao[0], proxima_posicao[1]))
         posicao = proxima_posicao
     
     return trajeto

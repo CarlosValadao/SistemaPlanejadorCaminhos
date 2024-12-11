@@ -22,8 +22,8 @@ def dividir_por_10(lista):
 
 def multiplicar_por_10(lista):
     return [
-        (x * 10, y * 10, z)  # Multiplica apenas os dois primeiros valores (x, y)
-        for (x, y, z) in lista
+        (x * 10, y * 10)  # Multiplica apenas os dois primeiros valores (x, y)
+        for (x, y) in lista
     ]
 
 class RobotPositionThread(QThread):
@@ -104,13 +104,18 @@ class RobotArea(QFrame):
         painter.setBrush(QColor(200, 200, 200, 100))
         for obstacle in self.obstacles:
             start, end = obstacle
-            if start is not None and end is not None:  # Ensure both points are valid
+            if start is not None and end is not None:
                 painter.drawRect(start.x(), start.y(), self.rect_width, self.rect_height)
 
         #objetivo
-        painter.setBrush(QColor(0, 200, 0))  # Green color for the objectives
+        painter.setBrush(QColor(0, 200, 0))
         for obj in self.objective:
             painter.drawEllipse(obj.x(), obj.y(), 10, 10)
+
+        #trajetoria
+        painter.setBrush(QColor(0, 0, 255))
+        for pos in self.trajetoria:
+            painter.drawEllipse(pos[0]*2, 360 - pos[1]*2, 5, 5)
 
         # desenha o retangulo
         if self.drawing and self.start_point:
@@ -299,17 +304,18 @@ class RobotInterface(QWidget):
             self.add_objective_button.setStyleSheet("")
 
     def path_planning(self):
-        grid_size = (27,18)
-
+        grid_size = (27, 18)
         obstaculos = dividir_por_10(self.robot_area.robot_obstacles)
         objetivo = [tuple(valor // 10 for valor in tupla) for tupla in self.robot_area.robot_objective]
-
         inicio = (13, 8)
 
         campo = calcular_campo_potencial(grid_size, objetivo[0], obstaculos, 1)
         trajetoria = planejar_trajetoria(campo, inicio, objetivo)
         #print(trajetoria)
+
         self.robot_area.trajetoria = multiplicar_por_10(trajetoria)
+        print(self.robot_area.trajetoria)
+        #self.robot_area.rastro.extend(self.robot_area.trajetoria)
         self.robot_area.update()
         print("Trajetória gerada:", self.robot_area.trajetoria)
 
@@ -318,9 +324,9 @@ class RobotInterface(QWidget):
         self.close()
 
 if __name__ == '__main__':
-    environ['QT_QPA_PLATFORM'] = 'xcb'
-    supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
-    supervisor_client.catch_all_messages()
+    #environ['QT_QPA_PLATFORM'] = 'xcb'
+    #supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
+    #supervisor_client.catch_all_messages()
     app = QApplication(sys.argv)
     window = RobotInterface()
     window.show()
