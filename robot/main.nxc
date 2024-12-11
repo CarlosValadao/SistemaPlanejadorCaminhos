@@ -1,3 +1,4 @@
+
 #include "RPP.h"
 
 // ================== Caracteristicas construtivas ==================
@@ -16,7 +17,7 @@
 #define P                   90
 #define I                   40
 #define D                   70
-#define QUEUE_SIZE 10 // Tamanho máximo da fila de pontos
+#define QUEUE_SIZE 4 // Tamanho máximo da fila de pontos
 //
 #define COR_PRETA_LMI 28
 #define COR_PRETA_LMS 40
@@ -75,7 +76,7 @@ mutex messageMutex;
 
 
 
-int coordinates[QUEUE_SIZE][2]; // Array para armazenar os elementos da fila
+int coordinates[QUEUE_SIZE][2] = {{90, 0}, {90, 77}, {155, 77}, {186, 145}}; // Array para armazenar os elementos da fila
 int front = 0;         // Índice do início da fila
 
 // ================== tasks ==================
@@ -87,36 +88,36 @@ task sendRobotPosition(){
           //NumOut(0, LCD_LINE2, deslocamento[1]);
           Wait(900);
           //PlayTone(300, 1000);
-          Acquire(RobotInOperationMutex);
-          if (RobotInOperation){
+          //Acquire(RobotInOperationMutex);
+          //if (RobotInOperation){
                // Chama o mutex para não ler enquanto alguém muda
-               Acquire(mutexDeslocamento);
-               formatDataMessage(deslocamento[0], deslocamento[1], dataMsgToSend);
+               //Acquire(mutexDeslocamento);
+               //formatDataMessage(deslocamento[0], deslocamento[1], dataMsgToSend);
                //formatDataMessage(0, 0, regiao, dataMsgToSend);
-               Release(mutexDeslocamento);
-               sendMessage(dataMsgToSend, POSITION);
-          }
+               //Release(mutexDeslocamento);
+               //sendMessage(dataMsgToSend, POSITION);
+          //}
           /*else if (!RobotInOperation)
           {
 	       	  PlayTone(300, 1000);
 	       	  Release(RobotInOperationMutex);
 		  break;
           } */         
-          Release(RobotInOperationMutex);
+          //Release(RobotInOperationMutex);
      }
 }
 
 task odometria(){
 	while (1){
-		Acquire(RobotInOperationMutex);
-		if (RobotInOperation){
-			// TextOut(0, LCD_LINE1, "ROBÔ EM OPERACAO");
+		//Acquire(RobotInOperationMutex);
+		//if (RobotInOperation){
+			 TextOut(0, LCD_LINE1, "ROBÔ EM OPERACAO");
 			Acquire(mutexDeslocamento);
 			calcula_deslocamento();
 			Release(mutexDeslocamento);
 			Wait(500);
-		}
-		Release(RobotInOperationMutex);
+		//}
+		//Release(RobotInOperationMutex);
 	}
 }
 
@@ -302,7 +303,7 @@ void girar_eixo_v3(short turn_pct, long graus_curva){
 	}
 	muda_bussola(turn_pct);
 	Off(MOTOR_ED);
-	Wait(200);
+	Wait(SEC_1);
 }
 
 
@@ -311,10 +312,10 @@ void segue_frente_cm(float cm){
 	long grau = MotorRotationCount(MOTOR_D) + passo;
 	//
 	OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
-	while (MotorRotationCount(MOTOR_D) < grau);
+	while (MotorRotationCount(MOTOR_D) != grau);
     //
 	Off(MOTOR_ED);
-    Wait(200);
+    Wait(SEC_1);
 }
 
 
@@ -358,7 +359,7 @@ void executa_trajetoria(){
         // deslocamento[0] = targetX;
         // deslocamento[1] = targetY;
         // Release(mutexDeslocamento);
-        PlayTone(1000, 500); // ALINHEI UM PONTO
+        //PlayTone(1000, 500); // ALINHEI UM PONTO
         Acquire(mutexDeslocamento);
         TextOut(0, LCD_LINE1, "Estou em X= ");
 		NumOut(0, LCD_LINE2, deslocamento[0]);
@@ -375,10 +376,10 @@ void executa_trajetoria(){
 task main (){
     SetVolume(100);
     //
-    orientacao = 90; // Começa voltado pro norte do mapa
+    orientacao = 0; // Começa voltado pro norte do mapa
     deslocamento[0] = 0;
     deslocamento[1] = 0;
-    RobotInOperation = false;
+    RobotInOperation = true;//false;
     gr_ant_RE = MotorRotationCount(MOTOR_E);
     gr_ant_RD = MotorRotationCount(MOTOR_D);
     //
@@ -388,10 +389,13 @@ task main (){
     //StartTask(readFirstSupervisorMessage); // VAI RECEBER O INICIO E A TRAJETORIA
     StartTask(odometria);
     //
-    while (!RobotInOperation);
+    //while (!RobotInOperation);
     // OS ALGORITMOS COMEÇAM AQUI EM BAIXO
     // -- Recebe as coordenadas dos pontos da trajetória. Coloca os pontos na fila
     // -- Executa a trajetória
     executa_trajetoria();
-
+    PlayTone(1000, 500); // FIM
+    //Acquire(RobotInOperationMutex);
+    //RobotInOperation = false;
+    //Release(RobotInOperationMutex);
 }
