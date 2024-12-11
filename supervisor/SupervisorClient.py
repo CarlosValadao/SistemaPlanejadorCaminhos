@@ -78,6 +78,27 @@ class SupervisorClient:
             self.show_warning_message("It's impossible to send messages\
                                     - there's nothing running on NXT")
     
+    def _send_data_message(self, data: list[tuple]) -> None:
+        try:
+            packed_coordinates = RPP.pack_coordinates(data)
+            for chunk in packed_coordinates:
+                self._nxt_brick.message_write(MAILBOX10, chunk)
+                sleep(0.1)
+        except DirectProtocolError:
+            self.show_warning_message("It's impossible to send messages\
+                                    - there's nothing running on NXT")
+
+    def send_coordinates(self, data: list[str]) -> None:
+        try:
+            self.send_message(RPP.START_SENDING_COORDS)
+            sleep(0.1)
+            self._send_data_message(data)
+            sleep(0.1)
+            self.send_message(RPP.STOP_SENDING_COORDS)
+        except DirectProtocolError:
+            self.show_warning_message("It's impossible to send messages\
+                                    - there's nothing running on NXT")
+
     def _read_message(self, mailbox: int) -> str:
         try:
             (inbox, received_message) = self._nxt_brick.message_read(mailbox, 0, True)

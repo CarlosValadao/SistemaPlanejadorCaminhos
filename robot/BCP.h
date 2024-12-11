@@ -1,18 +1,19 @@
 /*
 Boris's communication protocol
-BPC protocol defines and functions
-Use MAILBOX3 to send RESPONSE data
-Use MAILBOX1 to send RESPONSE message
-Use MAILBOX10 to receive message
+BCP protocol defines and functions
+Use MAILBOX3 to send RESPONSE data to supervisor
+Use MAILBOX1 to send RESPONSE message to supervisor
+Use MAILBOX10 to receive request message from supervisor
+Use MAILBOX7  to receive data message from supervisor
 */ 
    
 
-#ifndef __BPC__
-#define __BPC__
+#ifndef __BCP__
+#define __BCP__
 
 /*
 ---------------------
-     BPC defines
+     BCP defines
 ---------------------
 */ 
 

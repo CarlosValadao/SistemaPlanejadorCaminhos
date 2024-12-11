@@ -1,3 +1,5 @@
+import Assets
+
 # Robotics PBL Protocol
 
 from typing import Final
@@ -27,6 +29,11 @@ BASE: Final = 0
 STOCK: Final = 1
 MIDDLE: Final = 2
 
+START_SENDING_COORDS: Final = 0
+STOP_SENDING_COORDS : Final = 2
+
+MAX_BYTE_TRANSFER: Final = 58
+
 def parse_message(message: str) -> tuple[int]|int:
     #message = message.replace('\x00', '')
     message_head = message[0]
@@ -44,3 +51,8 @@ def parse_message(message: str) -> tuple[int]|int:
 
 def format_message(request_code: int) -> bytes:
     return f'1;{request_code}'.encode(encoding='utf-8')
+
+def pack_coordinates(data: list[tuple]) -> list[bytes]:
+    str_data = Assets.list_content_to_str(data)
+    packed_coordinates = Assets.slice_str(str_data, MAX_BYTE_TRANSFER)
+    return packed_coordinates
