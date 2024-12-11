@@ -1,6 +1,6 @@
 from nxt.locator import find
 from nxt.brick import Brick
-from constants import MAILBOX1, MAILBOX3, MAILBOX10, NXT_BLUETOOTH_MAC_ADDRESS
+from constants import MAILBOX1, MAILBOX3, MAILBOX7, MAILBOX10, NXT_BLUETOOTH_MAC_ADDRESS
 import RPP
 from threading import Thread, Lock
 from nxt.locator import BrickNotFoundError
@@ -82,7 +82,7 @@ class SupervisorClient:
         try:
             packed_coordinates = RPP.pack_coordinates(data)
             for chunk in packed_coordinates:
-                self._nxt_brick.message_write(MAILBOX10, chunk)
+                self._nxt_brick.message_write(MAILBOX7, chunk)
                 sleep(0.1)
         except DirectProtocolError:
             self.show_warning_message("It's impossible to send messages\

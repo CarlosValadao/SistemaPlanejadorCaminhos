@@ -47,6 +47,8 @@ void formatMessage(byte code, string &smessage);
 void formatDataMessage(float xcoord, float ycoord, byte region, string &smessage);
 bool sendMessage(string &message, byte msgType);
 bool readMessage(string &receivedMsg);
+bool getSupervisorMessage(string &receivedMessage, byte mailbox);
+bool readDataMessage(string &receivedMessage);
 
 #endif
 
@@ -89,12 +91,28 @@ bool sendMessage(string &message, byte msgType)
      return (successOnSend ? true : false);
 }
 
-bool readMessage(string &receivedMsg)
+bool getSupervisorMessage(string &receivedMessage, byte mailbox)
 {
-       if (ReceiveRemoteString(MAILBOX1, true, receivedMsg) == NO_ERR)
+       if (ReceiveRemoteString(mailbox, true, receivedMessage) == NO_ERR)
        {
-          receivedMsg = ByteArrayToStr(receivedMsg);
+          receivedMessage = ByteArrayToStr(receivedMessage);
           return true;
        }
        return false;
+}
+
+bool readMessage(string &receivedMsg)
+{
+       return getSupervisorMessage(receivedMsg, MAILBOX1);
+}
+
+bool readDataMessage(string &receivedMessage)
+{
+	string recvMessage;
+	if (getSupervisorMessage(recvMessage, MAILBOX7))
+	{
+		receivedMessage = StrCat(receivedMessage, recvMessage);
+		return true;
+	} 
+	else return false;
 }
