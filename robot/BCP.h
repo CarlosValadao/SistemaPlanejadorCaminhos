@@ -1,5 +1,5 @@
 /*
-Boris's Protocol Communication
+Boris's communication protocol
 BPC protocol defines and functions
 Use MAILBOX3 to send RESPONSE data
 Use MAILBOX1 to send RESPONSE message
