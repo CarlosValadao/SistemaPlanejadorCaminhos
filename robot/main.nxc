@@ -1,8 +1,8 @@
 
-#include "RPP.h"
+#include "BCP.h"
 
 // ================== Caracteristicas construtivas ==================
-#define MAX_BOX_MIN_DISTANCE 40
+#define MAX_BOX_MIN_DISTANCE 30
 #define DISTANCIA_ENTRE_RODAS 16.8 // cm
 #define DIAMETRO_RODA 5.6 // cm
 #define MOTOR_E   OUT_A // Motor da esquerda
@@ -47,6 +47,7 @@ void treatSupervisorRequest();
 void segue_frente_cm(float cm);
 void girar_eixo_v3(short turn_pct, long graus_curva);
 bool fim_de_curso();
+void DESVIA_OBSTACULO();
 // Para odometria
 float seno(int grau);
 float cosseno(int grau);
@@ -306,16 +307,33 @@ void girar_eixo_v3(short turn_pct, long graus_curva){
 	Wait(SEC_1);
 }
 
+void DESVIA_OBSTACULO(){
+    // Desvia do obstáculo e retorna à trajetória original
+    girar_eixo_v2(-100);  // Gira 90 graus para a esquerda
+    segue_frente_cm(15); // Avança 15 cm
+    girar_eixo_v2(100);  // Gira 90 graus para a direita
+    segue_frente_cm(50); // Avança 50 cm
+    girar_eixo_v2(100); // Gira 90 graus para a direita
+    segue_frente_cm(15); // Avança 15 cm
+    girar_eixo_v2(-100); // Gira 90 graus para a esquerda
+}
 
-void segue_frente_cm(float cm){
+void segue_frente_cm(float cm, bool evitarObstaculo){
 	long passo = (cm*360)/(PI*DIAMETRO_RODA);
 	long grau = MotorRotationCount(MOTOR_D) + passo;
 	//
 	OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
-	while (MotorRotationCount(MOTOR_D) != grau);
-    //
+	while (MotorRotationCount(MOTOR_D) != grau && (!evitarObstaculo || !fim_de_curso())){};
 	Off(MOTOR_ED);
     Wait(SEC_1);
+    // Verifico se saí por ter andando quanto eu queria ou por ter encontrado um obstáculo
+    if ((evitarObstaculo) && (SensorUS(ULTRASONIC_OUT) < MAX_BOX_MIN_DISTANCE)) {
+        segue_frente_cm(MAX_BOX_MIN_DISTANCE-10, false);// eu ando para frente para ficar 10 cm de distancia do obstaculo
+        // Se encontrei um obstáculo, faço a manobra de desvio
+        DESVIA_OBSTACULO();
+    }
+    //
+
 }
 
 
@@ -331,42 +349,29 @@ void executa_trajetoria(){
         int targetX = coordinates[i][0];
         int targetY = coordinates[i][1];
 	//===================== ALINHA O X ===================== //
-		//TextOut(0, LCD_LINE1, "vou andar em X= ");
-		//NumOut(0, LCD_LINE2, targetX-currentX);
-        // Determine a direção para alcançar o próximo ponto
         if (currentX < targetX) { // Movendo para o leste (0°)
             alinharOrientacao(0);
-            segue_frente_cm(targetX-currentX);
+            segue_frente_cm(targetX-currentX, true);
         } else if (currentX > targetX) { // Movendo para o oeste (180°)
             alinharOrientacao(180);
-            segue_frente_cm(currentX-targetX);
+            segue_frente_cm(currentX-targetX, true);
         }
 	//===================== ALINHA O Y ===================== //
-		//ClearScreen();
-		//Wait(SEC_1);
-		//TextOut(0, LCD_LINE1, "vou andar em Y= ");
-		//NumOut(0, LCD_LINE2, targetY-currentY);
         if (currentY < targetY) { // Movendo para o norte (90°)
             alinharOrientacao(90);
-            segue_frente_cm(targetY-currentY);
+            segue_frente_cm(targetY-currentY, true);
         } else if (currentY > targetY) { // Movendo para o sul (270°)
             alinharOrientacao(270);
-            segue_frente_cm(currentY-targetY);
+            segue_frente_cm(currentY-targetY, true);
         }
 
-        // Atualize a posição atual. (A PROPRIA THREAD JÁ FAZ ISSO)
-        // Acquire(mutexDeslocamento);
-        // deslocamento[0] = targetX;
-        // deslocamento[1] = targetY;
-        // Release(mutexDeslocamento);
-        //PlayTone(1000, 500); // ALINHEI UM PONTO
         Acquire(mutexDeslocamento);
         TextOut(0, LCD_LINE1, "Estou em X= ");
 		NumOut(0, LCD_LINE2, deslocamento[0]);
 		TextOut(0, LCD_LINE3, "Estou em Y= ");
 		NumOut(0, LCD_LINE4, deslocamento[1]);
         Release(mutexDeslocamento);
-        Wait(SEC_2);
+        Wait(SEC_1);
         //
         ClearScreen();
   		Wait(SEC_1);
