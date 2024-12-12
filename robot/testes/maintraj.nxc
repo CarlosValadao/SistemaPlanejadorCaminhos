@@ -1,0 +1,466 @@
+#include "RPP.h"
+
+// ================== Caracteristicas construtivas ==================
+#define MAX_BOX_MIN_DISTANCE 25
+#define DISTANCIA_ENTRE_RODAS 16.8 // cm
+#define DIAMETRO_RODA 5.6 // cm
+#define MOTOR_E   OUT_A // Motor da esquerda
+#define MOTOR_D   OUT_B // Mootor da direita
+#define MOTOR_ED  OUT_AB
+
+// ================== Constantes ==================
+#define CLOCKWISE           0
+#define COUNTERCLOCKWISE    1
+#define POWER               30
+#define GRAU_PARA_GIRO_90   260
+#define P                   90
+#define I                   40
+#define D                   70
+#define QUEUE_SIZE 4 // Tamanho máximo da fila de pontos
+//
+#define COR_PRETA_LMI 28
+#define COR_PRETA_LMS 40
+#define COR_PRATA_LMI 63
+#define COR_PRATA_LMS 80
+//
+#define BLACK_COLOR  0
+#define SILVER_COLOR 1
+#define RED_COLOR    2
+
+//================== Portas de Sensores e Atuadores ==================
+#define LIGHT_OUT S2
+#define TOUCH_OUT S3
+#define ULTRASONIC_OUT S4
+#define ULTRASONIC_SENSOR  IN_4
+#define TOUCH_SENSOR       IN_3
+#define LIGHT_SENSOR       IN_2
+//
+#define TOUCH_SENSOR_STATE SENSOR_3
+#define LIGHT_SENSOR_STATE SENSOR_2
+
+// ================== Prototipos de funções ==================
+// Para bluetooth
+void handleSupervisorRequest(byte requestCodeb);
+void treatSupervisorRequest();
+// Para movimentação
+bool segue_frente_cm(float cm, bool evitarObstaculo );
+void girar_eixo_v3(short turn_pct, long graus_curva);
+bool fim_de_curso();
+void DESVIA_OBSTACULO();
+// Para odometria
+float seno(int grau);
+float cosseno(int grau);
+void calcula_deslocamento();
+void muda_bussola(short turn_pct);
+// Para sensores
+void configureSensors();
+void playAlertBeep(byte ntime);
+
+// ================== Variaveis ==================
+long gr_ant_RE;// = MotorRotationCount(MOTOR_A);// Roda esquerda
+long gr_ant_RD;// Roda direita -> grau da roda direita
+mutex mutexRoda;// mutex para alterar os estados do robô
+
+int orientacao;// Indica a orientação do robo -> (90)NORTE - (180)OESTE - (270)SUL - (0)LESTE
+float deslocamento[2];//Indica o deslocamento em torno de X e Y respectivamente
+mutex mutexDeslocamento;// mutex para alterar os estados do robô
+
+byte robotStatus = AWAITING;
+byte requestCode = UCHAR_MAX;
+bool RobotInOperation = false;// Indica se o robô está disponivel na base
+mutex RobotInOperationMutex;
+
+string requestMsg, msgToSend = "";
+string dataMsgToSend, responseToRequest = "";
+mutex messageMutex;
+
+
+
+
+int front = 0;         // Índice do início da fila
+
+// ================== tasks ==================
+task sendRobotPosition(){
+	while (1)
+     	{
+     	  //ClearScreen();
+          //NumOut(0, LCD_LINE1, deslocamento[0]);
+          //NumOut(0, LCD_LINE2, deslocamento[1]);
+          Wait(900);
+          //PlayTone(300, 1000);
+          //Acquire(RobotInOperationMutex);
+          //if (RobotInOperation){
+               // Chama o mutex para não ler enquanto alguém muda
+               //Acquire(mutexDeslocamento);
+               //formatDataMessage(deslocamento[0], deslocamento[1], dataMsgToSend);
+               //formatDataMessage(0, 0, regiao, dataMsgToSend);
+               //Release(mutexDeslocamento);
+               //sendMessage(dataMsgToSend, POSITION);
+          //}
+          /*else if (!RobotInOperation)
+          {
+	       	  PlayTone(300, 1000);
+	       	  Release(RobotInOperationMutex);
+		  break;
+          } */         
+          //Release(RobotInOperationMutex);
+     }
+}
+
+task odometria(){
+	while (1){
+		//Acquire(RobotInOperationMutex);
+		//if (RobotInOperation){
+			 //TextOut(0, LCD_LINE1, "ROBÔ EM OPERACAO");
+			Acquire(mutexDeslocamento);
+			calcula_deslocamento();
+			Release(mutexDeslocamento);
+			Wait(500);
+		//}
+		//Release(RobotInOperationMutex);
+	}
+}
+
+task readFirstSupervisorMessage()
+{
+     while (1)
+     {
+          ClearScreen();
+          TextOut(5, LCD_LINE1, "Wait for the");
+          TextOut(5, LCD_LINE2, "first msg");
+          Acquire(RobotInOperationMutex);
+          treatSupervisorRequest();
+          if (RobotInOperation)
+          {
+               	Release(RobotInOperationMutex);
+               	PlayTone(300, 2000);
+               	break;
+          }
+          //playBeep(6);
+          Release(RobotInOperationMutex);
+     }
+}
+
+// ================== FUNÇÕES ==================
+void playAlertBeep(byte ntime)
+{
+	while (ntime--)
+	{
+		PlayTone(2000, 500);
+		Wait(700);
+	}
+}
+
+void handleSupervisorRequest(byte requestCodeb)
+{
+     if (!RobotInOperation && requestCodeb == GO)
+     {
+          robotStatus = ONGOING;
+          RobotInOperation = true;
+          Acquire(messageMutex);
+          formatMessage(robotStatus, msgToSend);
+          sendMessage(msgToSend, RESPONSE);
+          Release(messageMutex);
+          PlaySound(SOUND_CLICK);
+     }
+     else if (requestCodeb != GO) playAlertBeep(5);
+}
+
+
+void treatSupervisorRequest()
+{
+     byte requestCode;
+     string recvdMessage;
+     if (readMessage(recvdMessage))
+     {
+          ClearScreen();
+          Acquire(messageMutex);
+          requestCode = parseMessage(recvdMessage);
+          requestMsg = recvdMessage;
+          Release(messageMutex);
+          TextOut(0, LCD_LINE1, "Received");
+          TextOut(0, LCD_LINE2, recvdMessage);
+          NumOut(0, LCD_LINE3, requestCode);
+          TextOut(0, LCD_LINE4, recvdMessage[0]);
+          TextOut(0, LCD_LINE5, recvdMessage[2]);
+          //if (recvdMessage[0] == '1') TextOut(0, LCD_LINE8, "É IGUAL A 1");
+          //if (recvdMessage[2] == '0') TextOut(0, LCD_LINE7, "É IGUAL A 0");
+          //Wait(1000);
+          handleSupervisorRequest(requestCode);
+     }
+}
+
+float seno(int grau){
+	if (grau==0) return 0; 
+	else if(grau==90) return 1;
+	else if(grau==180) return 0;
+	else if(grau==270) return -1;
+}
+float cosseno(int grau){
+	if (grau==0) return 1; 
+	else if(grau==90) return 0;
+	else if(grau==180) return -1;
+	else if(grau==270) return 0;
+}
+
+void configureSensors() {
+    SetSensorTouch(TOUCH_SENSOR);
+    SetSensorUltrasonic(ULTRASONIC_SENSOR);
+    SetSensorLight(LIGHT_SENSOR);
+}
+
+void muda_bussola(short turn_pct){
+	Acquire(mutexDeslocamento);
+	/////// Ao girar para direita
+	if(turn_pct == 100){
+          orientacao = orientacao - 90;
+	}
+	/////// Ao girar para esquerda
+	else if (turn_pct==-100){
+          orientacao = orientacao + 90;
+	}
+    if (orientacao == 360) orientacao = 0;
+	if (orientacao == -90) orientacao = 270;
+	Release(mutexDeslocamento);
+}
+
+void calcula_deslocamento(){
+     // Pego o grau atual
+     long RE_Atual = MotorRotationCount(MOTOR_E);
+     long RD_Atual = MotorRotationCount(MOTOR_D);
+     // Com esta conta eu tenho o deslocamento nulo ao girar no proprio eixo
+     long desloc_grau = ((RE_Atual -gr_ant_RE) + (RD_Atual -gr_ant_RD))/2;
+     float desloc_cm = ((2*PI*(DIAMETRO_RODA/2)*desloc_grau)/360);
+     // Atualizo o grau anterior do robo
+     gr_ant_RE = RE_Atual;
+     gr_ant_RD = RD_Atual;
+     // Atualizo a distancia do proprio robo
+	// em X
+    deslocamento[0] = deslocamento[0] + cosseno(orientacao)*desloc_cm;// seno e  cosseno recebem o valor em rads
+	// em Y
+    deslocamento[1] = deslocamento[1] + seno(orientacao)*desloc_cm;
+}
+
+bool fim_de_curso(){
+	// Se o sensor de toque foi acionado ou se estou lendo um valor que está no intervalo da cor preta
+	if ( (SensorUS(ULTRASONIC_OUT)<MAX_BOX_MIN_DISTANCE) || Sensor(TOUCH_SENSOR) || (Sensor(LIGHT_OUT) > COR_PRETA_LMI && Sensor(LIGHT_OUT) < COR_PRETA_LMS)){
+		return true;
+	}
+	return false;
+}
+
+// ==================== MOVIMENTAÇÃO PBL3 ====================
+// Função para alinhar a orientação do robô em relação a um alvo (em graus)
+void alinharOrientacao(int targetOrientation) {
+    Acquire(mutexDeslocamento);
+    long diff = (targetOrientation - orientacao);
+    Release(mutexDeslocamento);
+
+    if (diff > 0) { // Gire no sentido anti-horário
+        girar_eixo_v3(100, abs(diff));
+    } else if (diff < 0) { // Gire no sentido horário
+        girar_eixo_v3(-100, abs(diff));
+    }
+    Acquire(mutexDeslocamento);
+    orientacao = targetOrientation; // Atualize a orientação atual
+    Release(mutexDeslocamento);
+}
+
+void girar_eixo_v3(short turn_pct, long graus_curva){
+	Acquire(mutexDeslocamento);
+	calcula_deslocamento();
+	Release(mutexDeslocamento);
+
+    	long grau_giro_roda = (graus_curva*DISTANCIA_ENTRE_RODAS)/DIAMETRO_RODA;
+	long passo_esquerdo = MotorRotationCount(MOTOR_E) + (-turn_pct/100)*grau_giro_roda;
+	long passo_direito = MotorRotationCount(MOTOR_D) + (turn_pct/100)*grau_giro_roda;
+	// Girando ambos
+	OnFwdSyncPID(MOTOR_ED, POWER, turn_pct, 90, 40, 70);
+	while ((MotorRotationCount(MOTOR_D) != passo_direito) && (MotorRotationCount(MOTOR_E) != passo_esquerdo)){}
+	Off(MOTOR_ED);
+	Wait(SEC_1);
+	// Se estiver girando para direita
+	if(turn_pct == -100){
+		// Girando oq falta
+		OnFwd(MOTOR_D, (turn_pct/100)*POWER);
+		while (MotorRotationCount(MOTOR_D) > passo_direito){}
+		Off(MOTOR_D);
+		// Girando oq falta
+		OnFwd(MOTOR_E, -(turn_pct/100)*POWER);
+		while (MotorRotationCount(MOTOR_E) < passo_esquerdo){}
+		Off(MOTOR_E);
+	}
+	// Se estiver girando para direita
+	else{
+		// Girando oq falta
+		OnFwd(MOTOR_D, (turn_pct/100)*POWER);
+		//TextOut(0, LCD_LINE3, "já chamei esquerda");
+		while (MotorRotationCount(MOTOR_D) < passo_direito){}
+		Off(MOTOR_D);
+		//TextOut(0, LCD_LINE3, "passei while");//===============================================================================
+		// Girando oq falta
+		OnFwd(MOTOR_E, -(turn_pct/100)*POWER);
+		while (MotorRotationCount(MOTOR_E) > passo_esquerdo){}
+		Off(MOTOR_E);
+	}
+	muda_bussola(turn_pct);
+	Off(MOTOR_ED);
+	Wait(SEC_1);
+}
+
+void segue_frente_cm_V2(float cm){
+	long passo = (cm*360)/(PI*DIAMETRO_RODA);
+	long grau = MotorRotationCount(MOTOR_D) + passo;
+	//
+	OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
+	while (MotorRotationCount(MOTOR_D) < grau ){};
+	Off(MOTOR_ED);
+    	Wait(SEC_1);
+}
+
+void DESVIA_OBSTACULO(){
+    // Desvia do obstáculo e retorna à trajetória original
+    girar_eixo_v3(100, 90);  // Gira 90 graus para a esquerda
+    segue_frente_cm_V2(20); // Avança 15 cm
+    girar_eixo_v3(-100, 90);  // Gira 90 graus para a direita
+    segue_frente_cm_V2(40); // Avança 50 cm
+    girar_eixo_v3(-100, 90); // Gira 90 graus para a direita
+    segue_frente_cm_V2(20); // Avança 15 cm
+    girar_eixo_v3(100, 90); // Gira 90 graus para a esquerda
+    Off(MOTOR_ED);
+}
+
+bool teste_cond(bool evitarObstaculo){
+	if (evitarObstaculo == true){
+		return SensorUS(ULTRASONIC_OUT)>MAX_BOX_MIN_DISTANCE; 
+	}
+	else{
+		return true;
+	}
+}
+
+/**
+se evitarObstaculo==true eu não olho pro sensor ultrassom
+**/
+bool segue_frente_cm(float cm, bool evitarObstaculo){
+	long passo = (cm*360)/(PI*DIAMETRO_RODA);
+	long grau = MotorRotationCount(MOTOR_D) + passo;
+	//
+	OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
+	//while (MotorRotationCount(MOTOR_D) != grau && (evitarObstaculo==false || SensorUS(ULTRASONIC_OUT)>MAX_BOX_MIN_DISTANCE)){};
+	while (MotorRotationCount(MOTOR_D) < grau && !(Sensor(TOUCH_OUT))){};
+	Off(MOTOR_ED);
+    	Wait(SEC_1);
+    	// Verifico se saí por ter andando quanto eu queria ou por ter encontrado um obstáculo
+    	if (Sensor(TOUCH_OUT)){
+    		/////////// 
+    		/*
+    		passo = (abs(SensorUS(ULTRASONIC_OUT)-6)*360)/(PI*DIAMETRO_RODA);
+		grau = MotorRotationCount(MOTOR_D) + passo;
+    		OnFwdSyncPID(MOTOR_ED, POWER, 0, 90, 40, 70);
+		while (MotorRotationCount(MOTOR_D) != grau){};
+		Off(MOTOR_ED);
+    		Wait(SEC_1);
+    		*/
+    		return true;
+    		////////////////
+    		//TextOut(0, LCD_LINE1, "Aproximei                 ");
+    		//DESVIA_OBSTACULO();
+    		//TextOut(0, LCD_LINE1, "Desviei fora do algoritmo    ");
+    	}
+    	return false;
+    	// TALVEZ EU TENHA QUE FAZER ELE TESTAR DE NOVO SE AINDA PRECISA SEGUIR EM FRENTE POR X GRAUS
+}
+
+int coordinates[QUEUE_SIZE][2] = {{90, 0}, {90, 77}, {155, 77}, {186, 100}}; // Array para armazenar os elementos da fila
+//int coordinates[QUEUE_SIZE][2] = {{10, 0}, {20, 0}, {20, 10}, {30, 10}}; // Array para armazenar os elementos da fila
+
+void executa_trajetoria(){
+    bool obstaculo = false;
+    int currentX = 0, currentY = 0;
+    for (int i = 0; i < 4; i++) {
+        Acquire(mutexDeslocamento);
+        currentX = deslocamento[0];
+        currentY = deslocamento[1];
+        Release(mutexDeslocamento);
+       
+
+        int targetX = coordinates[i][0];
+        int targetY = coordinates[i][1];
+        /*
+        TextOut(0, LCD_LINE1, "Vou para o ponto");
+        TextOut(0, LCD_LINE2, "Vou para X= ");
+	NumOut(0, LCD_LINE3, targetX);
+	TextOut(0, LCD_LINE4, "Vou para Y= ");
+	NumOut(0, LCD_LINE5, targetY);
+	Wait(SEC_2);
+	ClearScreen();
+  	Wait(SEC_1);
+	*/
+	//===================== ALINHA O X ===================== //
+	NumOut(0, LCD_LINE3, targetX-currentX);
+        if (currentX < targetX) { // Movendo para o leste (0°)
+            alinharOrientacao(0);
+            obstaculo = segue_frente_cm(targetX-currentX, true);
+        } else if (currentX > targetX) { // Movendo para o oeste (180°)
+            alinharOrientacao(180);
+            obstaculo=segue_frente_cm(currentX-targetX, true);
+        }
+        /////
+        if (obstaculo){
+		DESVIA_OBSTACULO();
+		i--;
+        }
+        
+	//===================== ALINHA O Y ===================== //
+        if (currentY < targetY) { // Movendo para o norte (90°)
+            alinharOrientacao(90);
+            obstaculo=segue_frente_cm(targetY-currentY, true);
+        } else if (currentY > targetY) { // Movendo para o sul (270°)
+            alinharOrientacao(270);
+            obstaculo=segue_frente_cm(currentY-targetY, true);
+        }
+        /////
+        if (obstaculo){
+        	DESVIA_OBSTACULO();
+        	i--;
+        }
+	/*
+	TextOut(0, LCD_LINE1, "Finalizei ponto, vou mutex");
+	Wait(SEC_2);
+        Acquire(mutexDeslocamento);
+        TextOut(0, LCD_LINE2, "Estou em X= ");
+	NumOut(0, LCD_LINE3, deslocamento[0]);
+	TextOut(0, LCD_LINE4, "Estou em Y= ");
+	NumOut(0, LCD_LINE5, deslocamento[1]);
+        Release(mutexDeslocamento);
+        Wait(SEC_1);
+        //
+        ClearScreen();
+  	Wait(SEC_1);
+    	*/
+    	PlayTone(3000, 200);
+    }
+}
+
+task main (){
+    SetVolume(100);
+    //
+    orientacao = 0; // Começa voltado pro norte do mapa
+    deslocamento[0] = 0;
+    deslocamento[1] = 0;
+    RobotInOperation = true;//false;
+    gr_ant_RE = MotorRotationCount(MOTOR_E);
+    gr_ant_RD = MotorRotationCount(MOTOR_D);
+    //
+    configureSensors();
+    //
+    //StartTask(sendRobotPosition);
+    //StartTask(readFirstSupervisorMessage); // VAI RECEBER O INICIO E A TRAJETORIA
+    StartTask(odometria);
+    //
+    executa_trajetoria();
+    //
+    PlayTone(1000, 500); // FIM
+
+}
