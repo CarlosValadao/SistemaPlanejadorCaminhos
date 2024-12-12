@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def calcular_campo_potencial(grid_size, objetivo, obstaculos, alcance_repulsao, fator_atrativo=1.0, fator_repulsivo=100.0):
+def calcular_campo_potencial(grid_size, objetivo, obstaculos, alcance_repulsao, fator_atrativo=5.0, fator_repulsivo=25.0):
     """
     Calcula o campo potencial em uma grade.
     """
