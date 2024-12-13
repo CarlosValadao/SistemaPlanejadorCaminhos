@@ -16,13 +16,13 @@ trajetoria: lista de tuplas contendo posição e a orientação no formato (x, y
 
 def dividir_por_10(lista):
     return [
-        ((x1 // 10, y1 // 10), (x2 // 10, y2 // 10))
+        ((x1 // 20, y1 // 20), (x2 // 20, y2 // 20))
         for ((x1, y1), (x2, y2)) in lista
 ]
 
 def multiplicar_por_10(lista):
     return [
-        (x * 10, y * 10)  # Multiplica apenas os dois primeiros valores (x, y)
+        (x * 20, y * 20)  # Multiplica apenas os dois primeiros valores (x, y)
         for (x, y) in lista
     ]
 
@@ -306,10 +306,10 @@ class RobotInterface(QWidget):
             self.add_objective_button.setStyleSheet("")
 
     def path_planning(self):
-        grid_size = (27, 18)
+        grid_size = (14, 9)
         obstaculos = dividir_por_10(self.robot_area.robot_obstacles)
-        objetivo = [tuple(valor // 10 for valor in tupla) for tupla in self.robot_area.robot_objective]
-        inicio = (13, 8)
+        objetivo = [tuple(valor // 20 for valor in tupla) for tupla in self.robot_area.robot_objective]
+        inicio = (7, 5)
 
         campo = calcular_campo_potencial(grid_size, objetivo[0], obstaculos, 1)
         trajetoria = planejar_trajetoria(campo, inicio, objetivo)
