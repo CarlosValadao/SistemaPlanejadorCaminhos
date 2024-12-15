@@ -316,7 +316,6 @@ class RobotInterface(QWidget):
         #print(trajetoria)
 
         self.robot_area.trajetoria = multiplicar_por_10(trajetoria)
-        print(self.robot_area.trajetoria)
         #self.robot_area.rastro.extend(self.robot_area.trajetoria)
         self.robot_area.update()
         print("Trajetória gerada:", self.robot_area.trajetoria)
