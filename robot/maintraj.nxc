@@ -363,6 +363,11 @@ bool executa_trajetoria(){
        
         int targetX = coordinates[i][0];
         int targetY = coordinates[i][1];
+	// Como nunca vamos para a posição (0,0), se tiver isso significa que ele terminou tudo
+	if (targetX==0 && targetY==0){
+		break;
+	}
+
         TextOut(0, LCD_LINE3, "em x=");
         NumOut(0, LCD_LINE4, targetX);
         TextOut(0, LCD_LINE5, "em y=");
