@@ -39,8 +39,8 @@ def planejar_trajetoria(campo, inicio, objetivo, max_passos=1000):
     posicao = inicio
 
     for _ in range(max_passos):
-        print(posicao)
-        print(objetivo)
+        #print(posicao)
+        #print(objetivo)
         
         # Verifica se atingiu o objetivo
         if posicao == objetivo[0]:
@@ -64,6 +64,13 @@ def planejar_trajetoria(campo, inicio, objetivo, max_passos=1000):
         # Calcula a próxima posição com base no campo potencial
         proxima_posicao = min(vizinhos, key=lambda p: campo[p])
         #orientacao = calcular_orientacao(posicao, proxima_posicao)
+
+        ## ------------- ETAPA DE PROCESSAMENTO EXTRA ------------- ##
+        ## --- Para evitar muitos pontos dentro da bancada, ele só anda até o meio
+        if proxima_posicao[1] > 160/10  or proxima_posicao[1] < 20/10:
+                break
+        ## ------------------------------------------------ ##
+
         trajeto.append((proxima_posicao[0], proxima_posicao[1]))
         posicao = proxima_posicao
     
