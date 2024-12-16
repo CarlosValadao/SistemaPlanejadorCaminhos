@@ -2,6 +2,8 @@
 # that help to improve the supervisor functionalities
 
 from datetime import datetime
+import RPP
+
 
 def datetime_formated() -> str:
     return datetime.now().strftime('%d-%m-%Y %H:%M:%S')
@@ -29,6 +31,12 @@ def list_content_to_str(data: list) -> str:
             str_data += f'{item} '
     return str_data[:-1]
 
+
+def num_to_str(num: int) -> str:
+    return str(num)
+
+
 if __name__ == '__main__':
-    data = '12 34 56 89 10'
-    print(slice_str(data, 5))
+    data1 = [ (510, 610), (710, 810), (910, 1010) ]
+    data2 = [(130, 90), (130, 80), (130, 70), (130, 60), (130, 50), (130, 40), (140, 40), (150, 40), (160, 40), (160, 30), (160, 20)]
+    print(RPP.pack_coordinates(data2, 57))

@@ -32,7 +32,7 @@ MIDDLE: Final = 2
 START_SENDING_COORDS: Final = 0
 STOP_SENDING_COORDS : Final = 2
 
-MAX_BYTE_TRANSFER: Final = 58
+MAX_BYTE_TRANSFER: Final = 57
 
 def parse_message(message: str) -> tuple[int]|int:
     #message = message.replace('\x00', '')
@@ -49,10 +49,34 @@ def parse_message(message: str) -> tuple[int]|int:
         region = int(region)
         return (displacement, guidance, region)
 
+
 def format_message(request_code: int) -> bytes:
     return f'1;{request_code}'.encode(encoding='utf-8')
 
-def pack_coordinates(data: list[tuple]) -> list[bytes]:
-    str_data = Assets.list_content_to_str(data)
-    packed_coordinates = Assets.slice_str(str_data, MAX_BYTE_TRANSFER)
-    return packed_coordinates
+'''
+packet_size em funcao do tamanho da string e nao da quantidade de numeros
+'''
+def pack_coordinates(data: list[tuple], packet_size: int = MAX_BYTE_TRANSFER) -> list[bytes]:
+    packets = []
+    chunk = ''
+    str_point = ''
+    data_content = [coordinate for point in data for coordinate in point]
+    data_size = len(data_content)
+    i = 0
+    while(i < data_size):
+        str_point = Assets.num_to_str(data_content[i])
+        chunk_len = len(chunk)
+        str_point_len = len(str_point)
+        if (chunk_len + str_point_len == packet_size) or (chunk_len + str_point_len + 1) == packet_size:
+            chunk = chunk + str_point
+            packets.append(chunk.encode())
+            chunk = ''
+        elif chunk_len + str_point_len + 1 < packet_size:
+            chunk = chunk + f'{str_point} '
+        else:
+            packets.append(chunk[:-1].encode())
+            chunk = f'{str_point} '
+        i = i + 1
+    if chunk:
+        packets.append(chunk[:-1].encode())
+    return packets

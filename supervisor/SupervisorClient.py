@@ -78,23 +78,23 @@ class SupervisorClient:
             self.show_warning_message("It's impossible to send messages\
                                     - there's nothing running on NXT")
     
-    def _send_data_message(self, data: list[tuple]) -> None:
+    def _send_data_message(self, data: list[bytes]) -> None:
         try:
-            packed_coordinates = RPP.pack_coordinates(data)
-            for chunk in packed_coordinates:
-                self._nxt_brick.message_write(MAILBOX7, chunk)
-                sleep(0.1)
+            for chunk in data:
+                self._nxt_brick.message_write(MAILBOX1, chunk)
+                print(f'ENVIANDO -> {chunk}')
         except DirectProtocolError:
             self.show_warning_message("It's impossible to send messages\
                                     - there's nothing running on NXT")
 
-    def send_coordinates(self, data: list[str]) -> None:
+    def send_coordinates(self, data: list[bytes]) -> None:
         try:
-            self.send_message(RPP.START_SENDING_COORDS)
-            sleep(0.1)
+            #packed_coordinates = RPP.pack_coordinates(data, 8)
+            # self.send_message(RPP.START_SENDING_COORDS)
+            # sleep(0.4)
             self._send_data_message(data)
-            sleep(0.1)
-            self.send_message(RPP.STOP_SENDING_COORDS)
+            # sleep(0.4)
+            # self.send_message(RPP.STOP_SENDING_COORDS)
         except DirectProtocolError:
             self.show_warning_message("It's impossible to send messages\
                                     - there's nothing running on NXT")
@@ -174,6 +174,16 @@ class SupervisorClient:
     
 if __name__ == '__main__':
     supervisor_client = SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
-    supervisor_client.send_message(request_code=RPP.GO)
-    supervisor_client.catch_all_messages()
+    data = [ (120, 220), (320, 420) ]
+    data1 = [ (510, 610), (710, 810), (910, 1010) ]
+    packets = RPP.pack_coordinates(data1, 8)
+    supervisor_client.send_message(request_code=RPP.START_SENDING_COORDS)
+    sleep(0.8)
+    #sleep(2)
+    supervisor_client.send_coordinates(packets)
+    #sleep(0.2)
+    #supervisor_client.send_coordinates(data1)
+    #sleep(0.2)
+    #supervisor_client.send_coordinates(data1)
+    # supervisor_client.catch_all_messages()
     # supervisor_client.close_nxt_connection()

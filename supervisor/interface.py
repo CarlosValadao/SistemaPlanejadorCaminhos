@@ -4,6 +4,7 @@ from PyQt5.QtCore import Qt, QTimer, QThread, pyqtSignal, QPoint
 from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout, QHBoxLayout, QFrame, QLabel
 from PyQt5.QtGui import QPainter, QColor, QFont
 import SupervisorClient
+import RPP
 from trajetoria import calcular_campo_potencial, planejar_trajetoria
 from threading import Thread
 from constants import NXT_BLUETOOTH_MAC_ADDRESS
@@ -168,7 +169,7 @@ class RobotInterface(QWidget):
         self.main_layout = QHBoxLayout()
         font = QFont()
         font.setPointSize(11)
-        label_width = 190
+        label_width = 130
         label_height = 50
 
         self.control_panel = QFrame(self)
@@ -197,22 +198,22 @@ class RobotInterface(QWidget):
         self.quit_button.clicked.connect(self.close_application)
         self.control_layout.addWidget(self.quit_button)
 
-        self.region_label = QLabel('Região: Base', self)
-        self.region_label.setFont(font)
-        self.region_label.setFixedSize(label_width, label_height)
-        self.region_label.setStyleSheet(""" 
-            QLabel {
-                border: 2px solid #333;
-                border-radius: 8px;
-                background-color: #f0f0f0;
-                padding: 8px;
-                color: #005500;
-                font-weight: bold;
-            }
-        """)
-        self.control_layout.addWidget(self.region_label)
+        # self.region_label = QLabel('Região: Base', self)
+        # self.region_label.setFont(font)
+        # self.region_label.setFixedSize(label_width, label_height)
+        # self.region_label.setStyleSheet(""" 
+        #     QLabel {
+        #         border: 2px solid #333;
+        #         border-radius: 8px;
+        #         background-color: #f0f0f0;
+        #         padding: 8px;
+        #         color: #005500;
+        #         font-weight: bold;
+        #     }
+        # """)
+        # self.control_layout.addWidget(self.region_label)
 
-        self.coordinates_label = QLabel('Coordenadas: (0, 0)', self)
+        self.coordinates_label = QLabel('Coords: (0, 0)', self)
         self.coordinates_label.setFont(font)
         self.coordinates_label.setFixedSize(label_width, label_height)
         self.coordinates_label.setStyleSheet(""" 
@@ -247,6 +248,9 @@ class RobotInterface(QWidget):
         self.comm_thread.start()
         if not self.robot_active:
             supervisor_client.send_message(request_code=0)
+            packets = RPP.pack_coordinates(self.robot_area.trajetoria)
+            print(f'PACKETS TEM TAMANHO {len(packets)}')
+            supervisor_client.send_coordinates(packets)
 
     def control_interface(self, control):
         if control == 3:
@@ -282,14 +286,14 @@ class RobotInterface(QWidget):
         self.robot_area.update_robot_position([new_x, new_y])
 
         self.coordinates_label.setText(f'Coordenadas: ({new_x}, {new_y})')
-        if regiao == 0:
-            self.region_label.setText('Região: Base')
-        elif regiao == 1:
-            self.region_label.setText('Região: Pátio')
-        elif regiao == 2:
-            self.region_label.setText('Região: Estoque')
-        else:
-            self.region_label.setText('Região: Desconhecida')
+        # if regiao == 0:
+        #     self.region_label.setText('Região: Base')
+        # elif regiao == 1:
+        #     self.region_label.setText('Região: Pátio')
+        # elif regiao == 2:
+        #     self.region_label.setText('Região: Estoque')
+        # else:
+        #     self.region_label.setText('Região: Desconhecida')
 
     def toggle_drawing_mode(self):
         self.drawing_mode = not self.drawing_mode
