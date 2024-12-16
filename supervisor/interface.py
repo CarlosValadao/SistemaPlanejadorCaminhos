@@ -308,7 +308,7 @@ class RobotInterface(QWidget):
     def path_planning(self):
         grid_size = (27, 18)
         obstaculos = dividir_por_10(self.robot_area.robot_obstacles)
-        objetivo = [tuple(valor // 10 for valor in tupla) for tupla in self.robot_area.robot_objective]
+        objetivo = [tuple(round(valor / 10) for valor in tupla) for tupla in self.robot_area.robot_objective]
         inicio = (13, 9)
 
         campo = calcular_campo_potencial(grid_size, objetivo[0], obstaculos, 1)
@@ -326,9 +326,9 @@ class RobotInterface(QWidget):
         self.close()
 
 if __name__ == '__main__':
-    #environ['QT_QPA_PLATFORM'] = 'xcb'
-    #supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
-    #supervisor_client.catch_all_messages()
+    environ['QT_QPA_PLATFORM'] = 'xcb'
+    supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
+    supervisor_client.catch_all_messages()
     app = QApplication(sys.argv)
     window = RobotInterface()
     window.show()
