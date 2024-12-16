@@ -17,7 +17,7 @@ trajetoria: lista de tuplas contendo posição e a orientação no formato (x, y
 
 def dividir_por_10(lista):
     return [
-        ((x1 // 10, y1 // 10), (x2 // 10, y2 // 10))
+        ((round(x1 / 10), round(y1 / 10)), (round(x2 / 10), round(y2 / 10)))
         for ((x1, y1), (x2, y2)) in lista
 ]
 
