@@ -28,17 +28,17 @@ def multiplicar_por_10(lista):
     ]
 
 class RobotPositionThread(QThread):
-    position_updated = pyqtSignal(int, int)
+    position_updated = pyqtSignal(int, int, int)
 
     def run(self):
         while True:
             received_messages = supervisor_client.get_data_msgs()
             if(received_messages):
                 for data_msg in received_messages:
-                    (new_x, new_y) = data_msg
+                    (new_x, new_y, region) = data_msg
                     new_x = ceil(new_x) 
                     new_y = ceil(new_y)
-                    self.position_updated.emit(new_x, new_y)
+                    self.position_updated.emit(new_x, new_y, region)
 
 class RobotCommThread(QThread):
     control_signal = pyqtSignal(int)
@@ -276,7 +276,7 @@ class RobotInterface(QWidget):
             self.position_thread.terminate()
             self.robot_active = False
 
-    def update_robot_position(self, new_x, new_y):
+    def update_robot_position(self, new_x, new_y, regiao):
         robot_area_width = self.robot_area.width()
         robot_area_height = self.robot_area.height()
         new_x = max(0, min(new_x + 20, robot_area_width - 20))

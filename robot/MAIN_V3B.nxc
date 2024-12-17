@@ -60,12 +60,9 @@ void sscanfd(string &input, unsigned short &numbers[], int &init);
 void girar_eixo_v3(short turn_pct, long graus_curva);
 bool segue_frente_cm(float cm, bool evitarObstaculo);
 void segue_frente_cm_V2(float cm);
-void fillCoordArray(unsigned short src[], byte srcSize, unsigned short &dest[]);
 bool executa_trajetoria();
 void alinharOrientacao(int targetOrientation);
 void DESVIA_OBSTACULO();
-unsigned short Floor(unsigned short num);
-
 
 float seno(int grau){
 	if (grau==0) return 0; 
@@ -92,14 +89,11 @@ mutex mutexRoda;// mutex para alterar os estados do robô
 int orientacao;// Indica a orientação do robo -> (90)NORTE - (180)OESTE - (270)SUL - (0)LESTE
 float deslocamento[2];//Indica o deslocamento em torno de X e Y respectivamente
 mutex mutexDeslocamento;// mutex para alterar os estados do robô
-mutex whichSideMutex;
 
-byte regiao; // 0-> BASE, 1->BANCADA, 2->MEIO, 3->ESTOQUE
 byte status;
 bool RobotInOperation = false;// Indica se o robô está disponivel na base
 mutex RobotInOperationMutex;
 
-byte whichSide = 0;
 byte robotStatus = AWAITING;
 byte requestCode = UCHAR_MAX;
 
@@ -107,11 +101,8 @@ string requestMsg, msgToSend = "";
 string dataMsgToSend, responseToRequest = "";
 mutex messageMutex;
 
-bool strangleBox = false;
-mutex strangleBoxMutex;
-
-unsigned short coordinates[50][2] = {0}; // Array para armazenar os elementos da fila
 unsigned short coords[100] = {0};
+
 int front = 0;         // Índice do início da fila
 byte TAM_LIST = 0; // tamanho da fila (é recebido via bluetooth)
 
@@ -134,42 +125,18 @@ void handleSupervisorRequest(byte requestCodeb)
           	Wait(900);
           	readMessage(coordsPt1);
           	Wait(400);
-          	//TextOut(0, LCD_LINE2, x);
           	readMessage(coordsPt2);
-          	//TextOut(0, LCD_LINE3, y);
           	Wait(400);
           	readMessage(coordsPt3);
-          	//TextOut(0, LCD_LINE4, z);
-          	//Wait(1000);
            	PlayTone(300, 2000);
            	sscanfd(coordsPt1, coords, init);
            	sscanfd(coordsPt2, coords, init);
            	sscanfd(coordsPt3, coords, init);
-           	//Wait(300);
-           	//ClearScreen();
-           	//TextOut(0, LCD_LINE1, "INIT ANTES");
-           	//NumOut(0, LCD_LINE2, init);
-           	//Wait(2000);
-           	//byte i = 0;
-           	//ClearScreen();
-           	//TextOut(0, LCD_LINE1, "ANTES DO WHILE");
-           	//Wait(2000);
-           	/*
-           	while ( i < init)
-           	{
-           		ClearScreen();
-           		TextOut(0, LCD_LINE1, "A");
-           		NumOut(0, LCD_LINE2, coords[i]);
-              	NumOut(0, LCD_LINE3, init);
-           		Wait(1000);
-           		i++;
-           	}
-           	*/
           TAM_LIST = init/2;
           robotStatus = ONGOING;
           RobotInOperation = true;
-          //formatMessage(robotStatus, msgToSend);
-          //sendMessage(msgToSend, RESPONSE);
+          formatMessage(robotStatus, msgToSend);
+          sendMessage(msgToSend, RESPONSE);
           PlaySound(SOUND_CLICK);
 
      }
@@ -229,6 +196,7 @@ bool fim_de_curso(){
 	}
 	return false;
 }
+
 
 /**
 se evitarObstaculo==true eu não olho pro sensor ultrassom
@@ -291,17 +259,12 @@ task sendRobotPosition(){
      }
      
 }
+
+
 /*
 Calcula a distância Percorrida a cada X tempos
 */
 task odometria(){
-	/*
-	short i;
-	for (i = 392; i < 1319; i=i+102){
-		PlayTone(i, 700);
-		Wait(500);
-	}
-	*/
 	while (1)
 	{
 
@@ -315,13 +278,6 @@ task odometria(){
 			Release(mutexDeslocamento);
 			Wait(500);
 		}
-		/*
-		else if(!RobotInOperation)
-		{
-			TextOut(0, LCD_LINE1, "SAINDO ODO");
-			Wait(1000);
-			break;
-		}*/
 		Release(RobotInOperationMutex);
 	}
 }
@@ -380,13 +336,14 @@ void muda_bussola(short turn_pct){
 	Release(mutexDeslocamento);
 }
 
+
 void calcula_deslocamento(){
      // Pego o grau atual
      long RE_Atual = MotorRotationCount(MOTOR_E);
      long RD_Atual = MotorRotationCount(MOTOR_D);
      // Com esta conta eu tenho o deslocamento nulo ao girar no proprio eixo
      long desloc_grau = ((RE_Atual -gr_ant_RE) + (RD_Atual -gr_ant_RD))/2;
-     float desloc_cm = -((2*PI*(DIAMETRO_RODA/2)*desloc_grau)/360);
+     float desloc_cm = ((2*PI*(DIAMETRO_RODA/2)*desloc_grau)/360);
      // Atualizo o grau anterior do robo
      gr_ant_RE = RE_Atual;
      gr_ant_RD = RD_Atual;
@@ -397,10 +354,6 @@ void calcula_deslocamento(){
 	//deslocamento[0] = desloc_cm;
 	 // em Y
      deslocamento[1] = deslocamento[1] + seno(orientacao)*desloc_cm;
-	//deslocamento[1] = orientacao;
-    //  NumOut(5, LCD_LINE1, gr_ant_RE);
-    //  NumOut(5, LCD_LINE2, gr_ant_RD);
-     //
 }
 
 
@@ -435,14 +388,9 @@ void sscanfd(string &input, unsigned short &numbers[], int &init)
 		number = StrToNum(accumulator);
 		numbers[auxNumbers+init] = number;
 		auxNumbers++;
-		ClearScreen();
-		TextOut(0, LCD_LINE1, accumulator);
-		Wait(1000);
 		accumulator = "";
 	}
 	init = init + auxNumbers;
-	ClearScreen();
-	Wait(1000);
 	return;
 }
 
@@ -490,11 +438,10 @@ void girar_eixo_v3(short turn_pct, long graus_curva){
 		while (MotorRotationCount(MOTOR_E) > passo_esquerdo){}
 		Off(MOTOR_E);
 	}
-	muda_bussola(turn_pct);
+	muda_bussola(-turn_pct);
 	Off(MOTOR_ED);
 	Wait(SEC_1);
 }
-
 
 
 // ==================== MOVIMENTAÇÃO PBL3 ====================
@@ -512,18 +459,6 @@ void alinharOrientacao(int targetOrientation) {
     Acquire(mutexDeslocamento);
     orientacao = targetOrientation; // Atualize a orientação atual
     Release(mutexDeslocamento);
-}
-
-void fillCoordArray(unsigned short src[], byte srcSize, unsigned short &dest[])
-{
-	byte i;
-	byte auxCol = 0, auxLine = 0;
-	for(i = 0; i < srcSize; i++)
-	{
-		dest[i] = src[i];
-		if(i > 0 && i % 2 == 0) auxLine++;
-	}
-	return;
 }
 
 
@@ -565,6 +500,7 @@ bool executa_trajetoria(){
             currentY = deslocamento[1];
             orientacaoAux = orientacao;
             Release(mutexDeslocamento);
+            segue_frente_cm(-3, true);
             DESVIA_OBSTACULO();
             Acquire(mutexDeslocamento);
             currentX = deslocamento[0];
@@ -611,8 +547,9 @@ bool executa_trajetoria(){
             	TextOut(0, LCD_LINE1, "CAMINHO BLOQ");
         	    formatMessage(ERROR, responseMsg);
 			    sendMessage(responseMsg, RESPONSE);
-            	//return false; 
+            	return false; 
             }
+            segue_frente_cm(-3, true);
             DESVIA_OBSTACULO();
             Acquire(mutexDeslocamento);
             currentX = deslocamento[0];
@@ -640,102 +577,29 @@ bool executa_trajetoria(){
             }
         }
     }
+    segue_frente_cm(10, true);
     formatMessage(SUCCESS, responseMsg);
     sendMessage(responseMsg, RESPONSE);
-    //return true;
+    return true;
 }
 
 
 task main (){
-	 string responseMsg = "";
-     strangleBox = true;
      SetVolume(100);
-     regiao = 0;
+     orientacao = 0; // Começa voltado pro norte do mapa
      //
-     orientacao = 90; // Começa voltado pro norte do mapa
+     deslocamento[0] = 130;
+     deslocamento[1] = 90;
      //
-     deslocamento[0] = 0;
-     deslocamento[1] = 0;
-     //
-     //RobotInOperation = true;
+     RobotInOperation = false;
      //
      gr_ant_RE = MotorRotationCount(MOTOR_E);
      gr_ant_RD = MotorRotationCount(MOTOR_D);
      configureSensors();
-     //goFoward30cmBetter();
-     //StartTask(sendRobotPosition);
+     StartTask(sendRobotPosition);
      StartTask(readFirstSupervisorMessage);
-     //StartTask(odometria);
-     //StartTask(decideSide);
-     while (!RobotInOperation)
-     {
-     	TextOut(0, LCD_LINE8, "AQUI NO LACO");
-     }
-     ClearScreen();
-     TextOut(0, LCD_LINE1, "finalizando...");
-     Wait(2000);
-     byte line = 0, col = 0;
-     TextOut(0, LCD_LINE3, "TAM_LIST");
-     NumOut(0, LCD_LINE4, TAM_LIST);
-     for(line = 0; line < TAM_LIST; line++)
-     {
-     	for(col = 0; col < 2; col++)
-     	{
-	 		ClearScreen();
- 			TextOut(0, LCD_LINE1, "task main");
- 			NumOut(0, LCD_LINE2, coords[(line * 2) + col]);
- 			Wait(1000);
-     	}
-     }
-     formatMessage(SUCCESS, responseMsg);
-	 sendMessage(responseMsg, RESPONSE);
-	 
-     //executa_trajetoria();// Recebe true se a trajetória foi executada com sucesso  
-     //sair_base();
-     //achar_estoque();
-     //pegar_caixa_v2();
-//     sair_estoque();
-     //sair_base();
-     //achar_bancada();
-     //achar_base();
-	 //RotateMotorEx(MOTOR_ED, POWER, -360, 0, true, true);
-          //RotateMotorEx(MOTOR_ED, POWER, -150, 0, true, true);
-          //achar_bancada();
-          //achar_base();
-     //StartTask(sendRobotPosition);
-     //StartTask(odometria);
-     // restante do codigo do robo
-     //OnFwdSync(MOTOR_ED, POWER+20, 0);
-     //Off(MOTOR_ED);
-     //segue_frente_v2();
-     //sair_base();
-     //achar_estoque();
-     //achar_bancada();
-     //achar_base();
-     //pegar_caixa();
-     ///sair_estoque();
-     //turn180d();
-     //Wait(500);
-     //OnRevSync(MOTOR_ED, POWER+20,0);
-     //while((Sensor(LIGHT_OUT) < COR_PRATA_LMI || Sensor(LIGHT_OUT)> COR_PRATA_LMS)){
-     //}
-     //Off(MOTOR_ED);
-     
-     //RotateMotorEx(MOTOR_ED, POWER, GRAU_PARA_GIRO_90, 100, true, true);//DIREITA
-     //RotateMotorEx(MOTOR_ED, POWER, GRAU_PARA_GIRO_90, -100, true, true);//ESQUERDA
+     StartTask(odometria);
+     while (!RobotInOperation);
+     executa_trajetoria();// Recebe true se a trajetória foi executada com sucesso  
 }
 
-
-
-// ------- Mudar o sair da base ------- //
-// ------- Fazer a nova bussola ------- //
-
-// Fazer teste para sentido do giro
-// Fazer teste pro bluetooth acionar tudo
-// Fazer teste do deslocamento na interface
-// Mudar o teste da bussola
-
-// FAZER A TASK QUE VAI DEIXAR O ROBO ENTRANDO NA OPERAÇÃO
-
-
-// - fazer teste para chegar no estoque
