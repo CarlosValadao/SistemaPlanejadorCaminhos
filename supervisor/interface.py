@@ -28,17 +28,17 @@ def multiplicar_por_10(lista):
     ]
 
 class RobotPositionThread(QThread):
-    position_updated = pyqtSignal(int, int, int)
+    position_updated = pyqtSignal(int, int)
 
     def run(self):
         while True:
             received_messages = supervisor_client.get_data_msgs()
             if(received_messages):
                 for data_msg in received_messages:
-                    (new_x, new_y, region) = data_msg
+                    (new_x, new_y) = data_msg
                     new_x = ceil(new_x) 
                     new_y = ceil(new_y)
-                    self.position_updated.emit(new_x, new_y, region)
+                    self.position_updated.emit(new_x, new_y)
 
 class RobotCommThread(QThread):
     control_signal = pyqtSignal(int)
@@ -95,9 +95,17 @@ class RobotArea(QFrame):
                 painter.setPen(Qt.black)
                 painter.drawRect(x, y, square_width, square_height)
 
-        painter.setBrush(QColor(200, 0, 0, 150))
+        painter.setBrush(QColor(255, 0, 0))  # Definindo a cor da linha como vermelho
+        painter.setPen(QColor(255, 0, 0))    # Definindo a caneta para desenhar
+
+        # Desenhando linhas entre os pontos de 'self.rastro'
         for i in range(len(self.rastro) - 1):
-            painter.drawLine(self.rastro[i][0], self.rastro[i][1], self.rastro[i + 1][0], self.rastro[i + 1][1])
+            # Acessando as coordenadas das tuplas
+            x1, y1 = self.rastro[i] 
+            x2, y2 = self.rastro[i + 1] 
+
+            # Desenhando a linha entre os pontos consecutivos
+            painter.drawLine(QPoint(x1+10, y1+10), QPoint(x2+10, y2+10))
 
         painter.setBrush(QColor(255, 0, 0))
         painter.drawEllipse(self.robot_position[0], self.robot_position[1], 20, 20)
@@ -213,7 +221,7 @@ class RobotInterface(QWidget):
         # """)
         # self.control_layout.addWidget(self.region_label)
 
-        self.coordinates_label = QLabel('Coords: (0, 0)', self)
+        self.coordinates_label = QLabel('(0, 0)', self)
         self.coordinates_label.setFont(font)
         self.coordinates_label.setFixedSize(label_width, label_height)
         self.coordinates_label.setStyleSheet(""" 
@@ -270,22 +278,26 @@ class RobotInterface(QWidget):
             timer.start(3000)
             self.robot_area.rastro.clear()
             self.position_thread.start()
-        elif control == 2:
+        elif control == 0:
             self.button.setText('Ativar Robô')
             self.button.setEnabled(True)
             self.position_thread.terminate()
             self.robot_active = False
+        elif control == 1:
+            self.button.setText('Bloqueado')
+            self.button.setEnabled(False)
+            self.button.setStyleSheet("background-color: red; color: black;")
 
-    def update_robot_position(self, new_x, new_y, regiao):
+    def update_robot_position(self, new_x, new_y):
         robot_area_width = self.robot_area.width()
         robot_area_height = self.robot_area.height()
-        new_x = max(0, min(new_x + 20, robot_area_width - 20))
-        new_y = max(0, min(150 - new_y, robot_area_height - 20))
+        new_x = max(0, min(new_x-5, robot_area_width - 20))
+        new_y = max(0, min(175 - new_y, robot_area_height - 20))
         new_x = new_x * 2
         new_y = new_y * 2
         self.robot_area.update_robot_position([new_x, new_y])
 
-        self.coordinates_label.setText(f'Coordenadas: ({new_x}, {new_y})')
+        self.coordinates_label.setText(f'({new_x}, {new_y})')
         # if regiao == 0:
         #     self.region_label.setText('Região: Base')
         # elif regiao == 1:

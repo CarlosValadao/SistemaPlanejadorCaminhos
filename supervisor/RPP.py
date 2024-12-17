@@ -43,11 +43,10 @@ def parse_message(message: str) -> tuple[int]|int:
         response_type = int(message_tail)
         return response_type
     elif message_head == POSITION:
-        (displacement, guidance, region) = map(lambda x: float(x), message_tail.split(sep=';'))
+        (displacement, guidance) = map(lambda x: float(x), message_tail.split(sep=';'))
         #print(f'message -> {message}')
         #print(f'x -> {displacement} && y -> {guidance}')
-        region = int(region)
-        return (displacement, guidance, region)
+        return (displacement, guidance)
 
 
 def format_message(request_code: int) -> bytes:
