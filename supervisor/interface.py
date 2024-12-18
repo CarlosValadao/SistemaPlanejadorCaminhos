@@ -52,7 +52,8 @@ class RobotCommThread(QThread):
 class RobotArea(QFrame):
     def __init__(self):
         super().__init__()
-        self.robot_position = [260, 170]
+        self.robot_position = []
+        self.int_robot_position = []
         self.rastro = []
         self.obstacles = []
         self.objective = []
@@ -108,7 +109,11 @@ class RobotArea(QFrame):
             painter.drawLine(QPoint(x1+10, y1+10), QPoint(x2+10, y2+10))
 
         painter.setBrush(QColor(255, 0, 0))
-        painter.drawEllipse(self.robot_position[0], self.robot_position[1], 20, 20)
+        if not self.int_robot_position:
+            pass
+        else:
+            (x, y) = self.int_robot_position[0]
+            painter.drawEllipse(round(x), round(y), 20, 20)
 
         #obstaculo
         painter.setPen(QColor(100, 100, 100))
@@ -140,6 +145,9 @@ class RobotArea(QFrame):
         if event.button() == Qt.LeftButton and self.parent().adding_objective_mode:
             self.add_objective(event.pos())
 
+        if event.button() == Qt.LeftButton and self.parent().adding_pos_mode:
+            self.add_pos(event.pos())
+
 
     def mouseReleaseEvent(self, event):
         if event.button() == Qt.LeftButton and self.drawing:
@@ -162,6 +170,16 @@ class RobotArea(QFrame):
         self.robot_objective.append((position.x()/2, 180-(position.y()/2)))
         print(self.robot_objective)
         print(f"Objective added at: {position}")
+        self.update()
+
+    def add_pos(self, position):
+        if(len(self.robot_position) > 0):
+            self.robot_position.pop()
+            self.int_robot_position.pop()
+        self.int_robot_position.append((position.x(), position.y()))
+        self.robot_position.append((round(position.x()/2), round(180-(position.y()/2))))
+        print(self.robot_position)
+        print(f"Position defined at: {position}")
         self.update()
 
     def set_rect_size(self, width, height):
@@ -189,7 +207,8 @@ class RobotInterface(QWidget):
         self.control_layout.addWidget(self.button)
 
         self.drawing_mode = False
-        self.adding_objective_mode = False  # Variável para controlar o modo de adicionar objetivo
+        self.adding_objective_mode = False
+        self.adding_pos_mode = False
         self.draw_button = QPushButton('Desenhar Obstaculo', self)
         self.draw_button.clicked.connect(self.toggle_drawing_mode)
         self.control_layout.addWidget(self.draw_button)
@@ -197,6 +216,10 @@ class RobotInterface(QWidget):
         self.add_objective_button = QPushButton('Adicionar Objetivo', self)  # Novo botão
         self.add_objective_button.clicked.connect(self.toggle_adding_objective_mode)
         self.control_layout.addWidget(self.add_objective_button)
+
+        self.add_pos_button = QPushButton('Posição Inicial', self)  # Novo botão
+        self.add_pos_button.clicked.connect(self.toggle_adding_pos_mode)
+        self.control_layout.addWidget(self.add_pos_button)
 
         self.trajetoria_button = QPushButton('Gerar Trajetoria', self)
         self.trajetoria_button.clicked.connect(self.path_planning)
@@ -279,8 +302,9 @@ class RobotInterface(QWidget):
             self.robot_area.rastro.clear()
             self.position_thread.start()
         elif control == 0:
-            self.button.setText('Ativar Robô')
+            self.button.setText('Sucesso')
             self.button.setEnabled(True)
+            self.button.setStyleSheet("background-color:green; color: black;")
             self.position_thread.terminate()
             self.robot_active = False
         elif control == 1:
@@ -321,12 +345,19 @@ class RobotInterface(QWidget):
         else:
             self.add_objective_button.setStyleSheet("")
 
+    def toggle_adding_pos_mode(self):
+        self.adding_pos_mode = not self.adding_pos_mode
+        if self.adding_pos_mode:
+            self.add_pos_button.setStyleSheet("background-color: green; color: white;")
+        else:
+            self.add_pos_button.setStyleSheet("")
+
     def path_planning(self):
         grid_size = (27, 18)
         obstaculos = dividir_por_10(self.robot_area.robot_obstacles)
         objetivo = [tuple(round(valor / 10) for valor in tupla) for tupla in self.robot_area.robot_objective]
-        inicio = (13, 9)
-
+        inicio = [tuple(round(valor / 10) for valor in tupla) for tupla in self.robot_area.robot_position]
+        inicio = inicio[0]
         campo = calcular_campo_potencial(grid_size, objetivo[0], obstaculos, 1)
         trajetoria = planejar_trajetoria(campo, inicio, objetivo)
         #print(trajetoria)
@@ -334,12 +365,12 @@ class RobotInterface(QWidget):
         self.robot_area.trajetoria = multiplicar_por_10(trajetoria)
         #self.robot_area.rastro.extend(self.robot_area.trajetoria)
         self.robot_area.update()
+        
         print("Trajetória gerada:", self.robot_area.trajetoria)
 
     def close_application(self):
         print("Aplicação fechando...")
         self.close()
-
 if __name__ == '__main__':
     environ['QT_QPA_PLATFORM'] = 'xcb'
     supervisor_client = SupervisorClient.SupervisorClient(NXT_BLUETOOTH_MAC_ADDRESS)
