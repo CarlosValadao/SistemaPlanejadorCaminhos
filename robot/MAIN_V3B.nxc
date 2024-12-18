@@ -467,7 +467,7 @@ bool executa_trajetoria(){
     bool obstaculo = false;
     int orientacaoAux = 0;
     int currentX = 0, currentY = 0;
-    for (int i = 0; i < TAM_LIST; i++) {
+    for (int i = 1; i < TAM_LIST; i++) {
         Acquire(mutexDeslocamento);
         currentX = deslocamento[0];
         currentY = deslocamento[1];
@@ -588,8 +588,6 @@ task main (){
      SetVolume(100);
      orientacao = 0; // Começa voltado pro norte do mapa
      //
-     deslocamento[0] = 130;
-     deslocamento[1] = 90;
      //
      RobotInOperation = false;
      //
@@ -600,6 +598,8 @@ task main (){
      StartTask(readFirstSupervisorMessage);
      StartTask(odometria);
      while (!RobotInOperation);
+     deslocamento[0] = coords[0];
+     deslocamento[1] = coords[1];
      executa_trajetoria();// Recebe true se a trajetória foi executada com sucesso  
 }
 
